@@ -365,6 +365,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\custom.min.css" />
+    <Content Include="Content\logotip.png" />
     <Content Include="Content\open-iconic\.gitignore" />
     <Content Include="Content\open-iconic\font\css\open-iconic-bootstrap.css" />
     <Content Include="Content\open-iconic\font\css\open-iconic-bootstrap.min.css" />
@@ -1941,7 +1942,7 @@
     <Content Include="Content\open-iconic\svg\zoom-in.svg" />
     <Content Include="Content\open-iconic\svg\zoom-out.svg" />
     <Content Include="Content\PagedList.css" />
-    <Content Include="favicon.ico" />
+    <Content Include="favicon.png" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="ApplicationInsights.config">
