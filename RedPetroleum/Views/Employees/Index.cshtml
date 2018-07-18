@@ -31,6 +31,18 @@
 
         </div>
     </div>
+    <!-- Filter  -->
+    <div class="row">
+        <div class="col-md-6">
+            <label class="control-label" for="departmentName-select-list">Выберите отдел (опционально)</label>
+            @Html.DropDownList("departmentId", ViewBag.DepartmentName as SelectList, "Все", htmlAttributes: new { @class = "form-control", onchange = "form.submit();", style = "border: 1px solid; border-color: #008cba;" })
+        </div>
+        <div class="col-md-6">
+            <label class="control-label" for="position-select-list">Выберите должность (опционально)</label>
+            @Html.DropDownList("positionId", ViewBag.PositionName as SelectList, "Все", htmlAttributes: new { @class = "form-control", onchange = "form.submit();", style = "border: 1px solid; border-color: #008cba;" })
+        </div>
+    </div>
+    <hr />
 }
 <table class="table table-striped">
     <tr>
