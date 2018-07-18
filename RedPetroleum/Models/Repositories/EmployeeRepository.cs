@@ -26,11 +26,11 @@ namespace RedPetroleum.Models.Repositories
 
         public Employee Get(Guid id) => db.Employees.Find(id);
 
-        public IEnumerable<Employee> GetAll() => db.Employees.Include(e => e.Department).Include(e => e.Position);
+        public IEnumerable<Employee> GetAll() => db.Employees.Include(e => e.Department).Include(e => e.Position).OrderBy(e=>e.EFullName);
 
         public IEnumerable<Employee> GetAllWithoutRelations()
         {
-            return db.Employees;
+            return db.Employees.OrderBy(e=>e.EFullName);
         }
 
         public IPagedList<Employee> GetAllIndex(int pageNumber, int pageSize, string search) => db.Employees.Where(x => x.EFullName.Contains(search) || search == null).Include(e => e.Department).Include(e => e.Position).OrderBy(x=>x.EFullName).ToPagedList(pageNumber, pageSize);
