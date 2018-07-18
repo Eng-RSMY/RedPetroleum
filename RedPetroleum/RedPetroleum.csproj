@@ -3353,12 +3353,6 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
-    <Content Include="Scripts\UI-Dropdown-master\dropdown.css" />
-    <Content Include="Scripts\UI-Dropdown-master\dropdown.js" />
-    <Content Include="Scripts\UI-Dropdown-master\dropdown.min.css" />
-    <Content Include="Scripts\UI-Dropdown-master\dropdown.min.js" />
-    <Content Include="Scripts\UI-Dropdown-master\index.js" />
-    <Content Include="Scripts\UI-Dropdown-master\package.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -3453,12 +3447,6 @@
     <Content Include="Views\TaskLists\CreateDepartmentTaskPost.cshtml" />
     <Content Include="Views\TaskLists\EditDepartmentTask.cshtml" />
     <Content Include="Views\TaskLists\DepartmentTaskDetails.cshtml" />
-    <Content Include="Scripts\UI-Dropdown-master\.versions" />
-    <Content Include="Scripts\UI-Dropdown-master\bower.json" />
-    <Content Include="Scripts\UI-Dropdown-master\composer.json" />
-    <Content Include="Scripts\UI-Dropdown-master\package.json" />
-    <Content Include="Scripts\UI-Dropdown-master\README.md" />
-    <Content Include="Scripts\UI-Dropdown-master\RELEASE-NOTES.md" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -3525,7 +3513,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54887</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

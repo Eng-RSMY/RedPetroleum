@@ -20,7 +20,7 @@
         <div class="col-md-10">
             @if (ViewBag.DepartmentId != null && ViewBag.DepartmentId is SelectList)
             {
-                @Html.DropDownList("DepartmentId", null, new { @class = "form-control" })
+                @Html.DropDownList("DepartmentId", null, new { @class = "form-control localytics-chosen", @id = "departmentsDropdown" })
                 @Html.ValidationMessageFor(model => model.TaskName, "", new { @class = "text-danger" })
             }
             else
@@ -71,3 +71,8 @@
     </div>
 </div>
 }
+<script>
+    $(function () {
+        $("#departmentsDropdown").chosen();
+    })
+</script>

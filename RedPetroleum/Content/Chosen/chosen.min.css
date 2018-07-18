@@ -1,5 +1,12 @@
 /* Chosen v1.6.2 | (c) 2011-2016 by Harvest | MIT License, https://github.com/harvesthq/chosen/blob/master/LICENSE.md */
 
+.localytics-chosen {
+    display: block !important;
+    position: absolute;
+    clip: rect(0,0,0,0);
+    height: 29px;
+}
+
 .chosen-container {
     position: relative;
     display: inline-block;
@@ -8,7 +15,7 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
-      
+    width: 100% !important;
 }
 
     .chosen-container * {
@@ -73,7 +80,6 @@
     overflow: hidden;
     text-decoration: none;
     white-space: nowrap;
-    
 }
 
 .chosen-container-single .chosen-default {
