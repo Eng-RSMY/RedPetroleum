@@ -10,7 +10,7 @@
 @if (User.IsInRole("admin") || User.IsInRole("manager"))
 {
     <p>
-        <a type="button" class="btn btn-primary" id="addTaskBtn" href="/TaskLists/Create?taskDate=@ViewBag.Today">
+        <a type="button" class="btn btn-primary" id="addTaskBtn" href="#" onclick="updateAddTaskUrl(false)">
             <i class="fa fa-plus"></i>
             Добавить задачу
         </a>
@@ -53,7 +53,7 @@
             }
         </div>
         <div class="col-md-3">
-            @Html.DropDownList("EmployeeId", ViewBag.EmployeeId as SelectList, "Выберите сотрудника", htmlAttributes: new { @class = "form-control", @id = "employeesDropdown" })
+            @Html.DropDownList("EmployeeId", ViewBag.EmployeeId as SelectList, "Выберите сотрудника", htmlAttributes: new { @class = "form-control", @id = "employeesDropdown", onclick = "updateAddTaskUrl(false)" })
         </div>
         <div class="col-md-2">
             <input class="form-control" id="taskDate" type="month" name="TaskDate" value="@ViewBag.Today" onchange="updateAddTaskUrl(false)">

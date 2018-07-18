@@ -15,7 +15,7 @@
         <div class="col-md-3">
             @if (ViewBag.DepartmentId != null && ViewBag.DepartmentId is SelectList)
             {
-                @Html.DropDownList("DepartmentId", null, htmlAttributes: new { @class = "form-control", @id = "departmentsDropdown" })
+                @Html.DropDownList("DepartmentId", null, "Выберите отдел", htmlAttributes: new { @class = "form-control", @id = "departmentsDropdown", onchange = "submitParamsToIndexPage(true)" })
             }
             else
             {
@@ -31,7 +31,7 @@
             <label for="taskDate">Выберите месяц</label>
         </div>
         <div class="col-md-3">
-            <input class="form-control" id="taskDate" type="month" name="taskDate" value="@ViewBag.SelectedDate" onchange="submitDateToIndexPage(true)">
+            <input class="form-control" id="taskDate" type="month" name="taskDate" value="@ViewBag.SelectedDate" onchange="submitParamsToIndexPage(true)">
         </div>
     </div>
 </div>
@@ -62,7 +62,7 @@
 </div>
 <div class="form-group">
     <div class="btn-group" role="group">
-        <a href="/TaskLists/DepartmentTasks?taskDate=@ViewBag.SelectedDate" id="getIndex" class="btn btn-info"><i class="fa fa-arrow-left" aria-hidden="true" title="Назад" data-toggle="tooltip" data-placement="top"><span style="padding: 5px;">Назад</span></i></a>
+        <a href="#" id="getIndex" class="btn btn-info" onclick="submitParamsToIndexPage(true)"><i class="fa fa-arrow-left" aria-hidden="true" title="Назад" data-toggle="tooltip" data-placement="top"><span style="padding: 5px;">Назад</span></i></a>
     </div>
 </div>
 <br /><br />
