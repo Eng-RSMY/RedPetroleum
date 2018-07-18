@@ -217,7 +217,7 @@ function addTask(forDepartment = null, inputHtml = null) {
         var warningMessage = `
     <div class="alert alert-warning  alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong>Сохраните задачу</strong>
+        <strong>Закройте поля для заполнения задачи (красный крестик ниже)</strong>
     </div>
 `;
         createArea.prepend(warningMessage);
@@ -244,8 +244,8 @@ function addTask(forDepartment = null, inputHtml = null) {
             </div>
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-success" id="submitTask" onclick="submitTask(${forDepartment})" title="Сохранить"><span class="oi oi-check" title="Сохранить" aria-hidden="true"></span></button>
-            <button type="button" class="btn btn-danger" id="removeGeneratedHtml" onclick="removeGeneratedHtml()"><span class="oi oi-x" title="Удалить" aria-hidden="true"></span></button>
+            <button type="button" class="btn btn-success" id="submitTask" onclick="submitTask(${forDepartment})" title="Сохранить"><i class="fa fa-check" title="Сохранить"  aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-danger" id="removeGeneratedHtml" onclick="removeGeneratedHtml()"><i class="fa fa-times" title="Удалить" aria-hidden="true"></i></button>
         </div>
     </div>
 `;
@@ -444,8 +444,8 @@ function editTask(forDepartment = null, taskId) {
             </div>
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-success" id="editTask" onclick="submitEditTask(${forDepartment})" title="Сохранить"><span class="oi oi-check" title="Сохранить" aria-hidden="true"></span></button>
-            <button type="button" class="btn btn-danger" id="removeGeneratedHtml" onclick="removeGeneratedHtml()"><span class="oi oi-x" title="Удалить" aria-hidden="true"></span></button>
+            <button type="button" class="btn btn-success" id="editTask" onclick="submitEditTask(${forDepartment})" title="Сохранить"><i class="fa fa-check" title="Сохранить"  aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-danger" id="removeGeneratedHtml" onclick="removeGeneratedHtml()"><i class="fa fa-times" title="Удалить" aria-hidden="true"></i></button>
         </div>
     </div>
 `;
@@ -550,13 +550,13 @@ function submitDepartmentRate(taskId) {
 function taskComment(taskId, forDepartment = false) {
     var taskRow = $("#comment_" + taskId);
     var saveBtnTemplate = `
-    <button type="button" class="btn btn-success" onclick="submitComment('${taskId}')" title="Сохранить"><span class="oi oi-check" title="Сохранить" aria-hidden="true"></span></button>
+    <button type="button" class="btn btn-success" onclick="submitComment('${taskId}')" title="Сохранить"><i class="fa fa-check" title="Сохранить"  aria-hidden="true"></i></button>
 `;
 
     if (forDepartment) {
         taskRow = $("#" + taskId);
         saveBtnTemplate = `
-    <button type="button" class="btn btn-primary" onclick="submitComment('${taskId}', true)" title="Сохранить"><span class="oi oi-check" title="Сохранить" aria-hidden="true"></span></button>
+    <button type="button" class="btn btn-primary" onclick="submitComment('${taskId}', true)" title="Сохранить"><i class="fa fa-check" title="Сохранить"  aria-hidden="true"></i></button>
 `;
     }
     var commentField = taskRow.find(".comment-field");

@@ -26,7 +26,7 @@ namespace RedPetroleum.Models.Repositories
 
         public Department Get(Guid id) => db.Departments.Find(id);
 
-        public IEnumerable<Department> GetAll() => db.Departments;
+        public IEnumerable<Department> GetAll() => db.Departments.OrderBy(n=>n.Name);
 
         public IPagedList<Department> GetAllIndex(int pageNumber, int pageSize, string search) => db.Departments.Where(x => x.Name.Contains(search) || search == null).Include(d => d.Departments).OrderBy(x=>x.Name).ToPagedList(pageNumber, pageSize);
 
