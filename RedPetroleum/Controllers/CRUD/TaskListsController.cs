@@ -302,7 +302,7 @@ namespace RedPetroleum.Controllers.CRUD
         {
             if (String.IsNullOrEmpty(mark)) return 0;
             double number;
-            if (double.TryParse(mark, out number))
+            if (double.TryParse(mark.Replace('.', ','), out number))
                 return number;
 
             throw new FormatException();
