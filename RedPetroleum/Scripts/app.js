@@ -1,3 +1,4 @@
+
 //This function for show and update DataTable ReportByDepartment on View
 function updateDepartmentTable() {
     var token = $('input[name="__RequestVerificationToken"]').val();
