@@ -231,7 +231,7 @@ function addTask(forDepartment = null, inputHtml = null) {
             <div class="row">
                 <label class="control-label col-md-4" for="TaskName">Задача</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskName" name="TaskName" required />
+                    <input type="text" class="form-control text-box single-line" autocomplete="off" id="TaskName" name="TaskName" required />
                 </div>
             </div>
         </div>
@@ -239,7 +239,7 @@ function addTask(forDepartment = null, inputHtml = null) {
             <div class="row">
                 <label class="control-label col-md-4" for="TaskDuration">Продолжительность</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskDuration" name="TaskDuration" required />
+                    <input type="text" class="form-control text-box single-line" autocomplete="off" id="TaskDuration" name="TaskDuration" required />
                 </div>
             </div>
         </div>
@@ -431,7 +431,7 @@ function editTask(forDepartment = null, taskId) {
             <div class="row">
                 <label class="control-label col-md-4" for="TaskName">Задача</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskName" name="TaskName" value="${taskName}" required />
+                    <input type="text" class="form-control text-box single-line" autocomplete="off" id="TaskName" name="TaskName" value="${taskName}" required />
                 </div>
             </div>
         </div>
@@ -439,7 +439,7 @@ function editTask(forDepartment = null, taskId) {
             <div class="row">
                 <label class="control-label col-md-4" for="TaskDuration">Продолжительность</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskDuration" name="TaskDuration" value="${taskDuration}" required />
+                    <input type="text" class="form-control text-box single-line" autocomplete="off" id="TaskDuration" name="TaskDuration" value="${taskDuration}" required />
                 </div>
             </div>
         </div>
@@ -449,7 +449,6 @@ function editTask(forDepartment = null, taskId) {
         </div>
     </div>
 `;
-
     addTask(forDepartment, generatedHtml);
 }
 
