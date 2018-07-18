@@ -368,6 +368,8 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Chosen\chosen-sprite.png" />
+    <Content Include="Content\Chosen\chosen.min.css" />
     <Content Include="Content\custom.min.css" />
     <Content Include="Content\logotip.png" />
     <Content Include="Content\open-iconic\.gitignore" />
@@ -1957,6 +1959,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -3350,6 +3353,12 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\UI-Dropdown-master\dropdown.css" />
+    <Content Include="Scripts\UI-Dropdown-master\dropdown.js" />
+    <Content Include="Scripts\UI-Dropdown-master\dropdown.min.css" />
+    <Content Include="Scripts\UI-Dropdown-master\dropdown.min.js" />
+    <Content Include="Scripts\UI-Dropdown-master\index.js" />
+    <Content Include="Scripts\UI-Dropdown-master\package.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -3444,6 +3453,12 @@
     <Content Include="Views\TaskLists\CreateDepartmentTaskPost.cshtml" />
     <Content Include="Views\TaskLists\EditDepartmentTask.cshtml" />
     <Content Include="Views\TaskLists\DepartmentTaskDetails.cshtml" />
+    <Content Include="Scripts\UI-Dropdown-master\.versions" />
+    <Content Include="Scripts\UI-Dropdown-master\bower.json" />
+    <Content Include="Scripts\UI-Dropdown-master\composer.json" />
+    <Content Include="Scripts\UI-Dropdown-master\package.json" />
+    <Content Include="Scripts\UI-Dropdown-master\README.md" />
+    <Content Include="Scripts\UI-Dropdown-master\RELEASE-NOTES.md" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

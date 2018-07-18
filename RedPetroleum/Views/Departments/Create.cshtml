@@ -26,7 +26,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ParentId, "Управляющий отдел", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ParentId", null, "Выбор управляющего отдела", htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("ParentId", null, "Выбор управляющего отдела", htmlAttributes: new { @class = "form-control", @id = "myDropdown" })
                 @Html.ValidationMessageFor(model => model.ParentId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -42,4 +42,9 @@
 <script>
     $("#Form").validate();
     $("#Form").removeAttr("novalidate");
+</script>
+<script>
+    $(function () {
+        $("#myDropdown").chosen();
+    })
 </script>

@@ -318,7 +318,7 @@ function submitTask(forDepartment = null) {
     return false;
 }
 
-function submitEditTask(forDepartment = null) {
+function submitEditTask(forDepartment = false) {
     var token = $('input[name="__RequestVerificationToken"]').val();
 
     var taskId = $("#generatedHtml").attr("data-taskid");
@@ -348,7 +348,7 @@ function submitEditTask(forDepartment = null) {
         "CommentEmployees": ""
     };
 
-    if (forDepartment != null) {
+    if (forDepartment) {
         var departmentId = $("#departmentsDropdown").val();
         var targetUrl = "/TaskLists/EditDepartmentTask";
         sendData["DepartmentId"] = departmentId;
@@ -418,7 +418,7 @@ function removeTask(taskId) {
     return false;
 }
 
-function editTask(forDepartment = null, taskId) {
+function editTask(forDepartment, taskId) {
     var token = $('input[name="__RequestVerificationToken"]').val();
 
     var taskRow = $("#" + taskId);
