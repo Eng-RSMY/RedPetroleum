@@ -12,7 +12,7 @@ namespace RedPetroleum.Models
         public string EmployeeName;
         public string Department;
         public string Position;
-        public DateTime AdoptionDate;
+        public string AdoptionDate;
         public double? AverageMark;
     }
 

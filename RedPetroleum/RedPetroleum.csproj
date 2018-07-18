@@ -333,6 +333,10 @@
     <Compile Include="Migrations\201807090456259_Add_displayName_TaskList.Designer.cs">
       <DependentUpon>201807090456259_Add_displayName_TaskList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807180442599_Delete-Employee_DateBorn.cs" />
+    <Compile Include="Migrations\201807180442599_Delete-Employee_DateBorn.Designer.cs">
+      <DependentUpon>201807180442599_Delete-Employee_DateBorn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -3480,6 +3484,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807090456259_Add_displayName_TaskList.resx">
       <DependentUpon>201807090456259_Add_displayName_TaskList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807180442599_Delete-Employee_DateBorn.resx">
+      <DependentUpon>201807180442599_Delete-Employee_DateBorn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
