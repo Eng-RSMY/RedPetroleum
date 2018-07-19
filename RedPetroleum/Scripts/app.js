@@ -641,26 +641,26 @@ function submitMarkOnEnter() {
 
 function updateAddTaskUrl(forDepartment) {
     var selectedDate = $("#taskDate").val();
-    
-
+    var selectedDepartment = $("#departmentsDropdown").val();
+    var selectedEmployee = $("#employeesDropdown").val();
     if (forDepartment) {
         $("#addTaskBtn")
-            .attr("href", "/TaskLists/CreateDepartmentTask?taskDate=" + selectedDate);
+            .attr("href", "/TaskLists/CreateDepartmentTask?DepartmentId=" + selectedDepartment + "&taskDate=" + selectedDate);
     } else {
         $("#addTaskBtn")
-            .attr("href", "/TaskLists/Create?taskDate=" + selectedDate);
+            .attr("href", "/TaskLists/Create?EmployeeId=" + selectedEmployee + "&taskDate=" + selectedDate);
     }
 }
 
-function submitDateToIndexPage(forDepartment) {
+function submitParamsToIndexPage(forDepartment) {
     var selectedDate = $("#taskDate").val();
-
-
+    var selectedDepartment = $("#departmentsDropdown").val();
+    var selectedEmployee = $("#employeesDropdown").val();
     if (forDepartment) {
         $("#getIndex")
-            .attr("href", "/TaskLists/DepartmentTasks?taskDate=" + selectedDate);
+            .attr("href", "/TaskLists/GetFilteredDepartmentTaskList?DepartmentId=" + selectedDepartment + "&taskDate=" + selectedDate);
     } else {
         $("#getIndex")
-            .attr("href", "/TaskLists/Index?taskDate=" + selectedDate);
+            .attr("href", "/TaskLists/GetFilteredTaskList?EmployeeId=" + selectedEmployee + "&taskDate=" + selectedDate);
     }
 }

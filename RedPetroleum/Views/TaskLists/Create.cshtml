@@ -15,7 +15,7 @@
             <label for="employee">Выберите сотрудника</label>
         </div>
         <div class="col-md-3">
-            @Html.DropDownList("EmployeeId", null, htmlAttributes: new { @class = "form-control", @id = "employeesDropdown" })
+            @Html.DropDownList("EmployeeId", null, "Выберите сотрудника", htmlAttributes: new { @class = "form-control", @id = "employeesDropdown", onchange = "submitParamsToIndexPage(true)" })
         </div>
     </div>
     <br />
@@ -56,7 +56,7 @@
 </div>
 <div class="form-group">
     <div class="btn-group" role="group">
-        <a href="/TaskLists/Index?taskDate=@ViewBag.SelectedDate" id="getIndex" class="btn btn-info"><i class="fa fa-arrow-left" aria-hidden="true" title="Назад" data-toggle="tooltip" data-placement="top"><span style="padding: 5px;">Назад</span></i></a>
+        <a href="#" id="getIndex" class="btn btn-info" onclick="submitParamsToIndexPage(false)"><i class="fa fa-arrow-left" aria-hidden="true" title="Назад" data-toggle="tooltip" data-placement="top"><span style="padding: 5px;">Назад</span></i></a>
     </div>
 </div>
 <br /><br />

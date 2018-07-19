@@ -142,5 +142,21 @@ namespace RedPetroleum.Models.Repositories
                  .Where(e =>
                     ((DateTime)e.TaskLists.FirstOrDefault().TaskDate) == taskDate).Select(e => e.TaskLists.Select(t => t.AverageMark).Average()).Average();
         }
+
+        public IPagedList<Employee> Filter(int pageNumber, int pageSize, IPagedList<Employee> employees, string positionId, string departmentId)
+        {
+            
+            var rawData = (from e in db.Employees
+                           select e).ToList();
+            var employee = from e in rawData
+                           select e;
+
+            if (!String.IsNullOrEmpty(positionId))
+                employees = employee.Where(e => e.Position.PositionId.ToString() == positionId).ToPagedList(pageNumber, pageSize);
+            if (!String.IsNullOrEmpty(departmentId))
+                employees = employee.Where(e => e.Department.DepartmentId.ToString() == departmentId).ToPagedList(pageNumber, pageSize);
+            
+            return employees;
+        }
     }
 }

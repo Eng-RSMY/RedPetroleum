@@ -26,13 +26,19 @@ namespace RedPetroleum.Controllers.CRUD
         public EmployeesController(UnitOfWork unit) => this.unitOfWork = unit;
 
         // GET: Employees
-        public ActionResult Index(int? page, string searching)
+        public ActionResult Index(int? page, string searching, string positionId, string departmentId)
         {
+
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             var employees = unitOfWork.Employees.GetAllIndex(pageNumber, pageSize, searching);
+            var filteredEmployees = (!String.IsNullOrEmpty(positionId)) || (!String.IsNullOrEmpty(departmentId))
+                ? unitOfWork.Employees.Filter(pageNumber, pageSize, employees, positionId, departmentId).OrderBy(x=>x.EFullName) 
+                : null;
             ViewBag.Message = TempData["Message"];
-            return View(employees);
+            ViewBag.PositionName = new SelectList(unitOfWork.Positions.GetAll(), "PositionId", "Name");
+            ViewBag.DepartmentName = new SelectList(unitOfWork.Departments.GetAll(), "DepartmentId", "Name");
+            return filteredEmployees == null ? View(employees) : View(filteredEmployees.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Employees/Details/5
