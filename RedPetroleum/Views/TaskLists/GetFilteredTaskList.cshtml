@@ -10,7 +10,7 @@
 <h2>Задачи для сотрудников</h2>
 
 <p>
-    <a href="/TaskLists/Create@(ViewBag.SelectedDate != null ? "?taskDate="+ViewBag.SelectedDate : null)" type="button" id="addTaskBtn" class="btn btn-primary">
+    <a href="#" type="button" id="addTaskBtn" class="btn btn-primary" onclick="updateAddTaskUrl(false)">
         <i class="fa fa-plus"></i>
         Добавить задачу
     </a>
@@ -23,7 +23,7 @@
     <!-- Search  -->
     <div class="row">
         <div class="col-md-11 search-div">
-            <input type="text" id="searching" name="searching" class="form-control search" placeholder="Введите наименование задачи" onchange="form.submit();"
+            <input type="text" id="searching" name="searching" class="form-control search" autocomplete="off" placeholder="Введите наименование задачи" onchange="form.submit();"
                    style="border: 1px solid; border-color: #008cba;" />
         </div>
         <div class="col-md-1 search-div-btn">
@@ -45,7 +45,7 @@
         <div class="col-md-3">
             @if (ViewBag.DepartmentId != null && ViewBag.DepartmentId is SelectList)
             {
-                @Html.DropDownList("DepartmentId", ViewBag.DepartmentId as SelectList, "Выберите отдел", htmlAttributes: new { @class = "form-control", @id = "departmentsDropdown" })
+                @Html.DropDownList("DepartmentId", ViewBag.DepartmentId as SelectList, "Выберите отдел", htmlAttributes: new { @class = "form-control localytics-chosen", @id = "departmentsDropdown" })
             }
             else
             {
@@ -55,7 +55,7 @@
             }
         </div>
         <div class="col-md-3">
-            @Html.DropDownList("EmployeeId", ViewBag.EmployeeId as SelectList, "Выберите сотрудника", htmlAttributes: new { @class = "form-control", @id = "employeesDropdown" })
+            @Html.DropDownList("EmployeeId", ViewBag.EmployeeId as SelectList, "Выберите сотрудника", htmlAttributes: new { @class = "form-control", @id = "employeesDropdown", onchange= "updateAddTaskUrl(false)"})
         </div>
         <div class="col-md-2">
             <input class="form-control" id="taskDate" type="month" name="taskDate" @(ViewBag.SelectedDate != null ? "value=" + ViewBag.SelectedDate : null) onchange="updateAddTaskUrl(false)">
@@ -164,4 +164,10 @@
 <script src="~/Scripts/app.js"></script>
 <script>
     submitCommentOnEnter()
+</script>
+<script>
+    $(function () {
+        $("#departmentsDropdown").chosen();
+        $("#employeesDropdown").chosen();
+    })
 </script>

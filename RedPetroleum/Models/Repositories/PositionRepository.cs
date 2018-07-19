@@ -26,7 +26,7 @@ namespace RedPetroleum.Models.Repositories
 
         public Position Get(Guid id) => db.Positions.Find(id);
 
-        public IEnumerable<Position> GetAll() => db.Positions.OrderByDescending(x => x.Name);
+        public IEnumerable<Position> GetAll() => db.Positions.OrderBy(x => x.Name);
 
         public IPagedList<Position> GetAllIndex(int pageNumber, int pageSize, string search) => db.Positions.Where(x => x.Name.Contains(search) || search == null).OrderBy(x => x.Name).ToPagedList(pageNumber, pageSize);
 

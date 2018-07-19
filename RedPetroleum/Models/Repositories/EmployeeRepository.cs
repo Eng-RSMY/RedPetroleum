@@ -26,11 +26,11 @@ namespace RedPetroleum.Models.Repositories
 
         public Employee Get(Guid id) => db.Employees.Find(id);
 
-        public IEnumerable<Employee> GetAll() => db.Employees.Include(e => e.Department).Include(e => e.Position);
+        public IEnumerable<Employee> GetAll() => db.Employees.Include(e => e.Department).Include(e => e.Position).OrderBy(e=>e.EFullName);
 
         public IEnumerable<Employee> GetAllWithoutRelations()
         {
-            return db.Employees;
+            return db.Employees.OrderBy(e=>e.EFullName);
         }
 
         public IPagedList<Employee> GetAllIndex(int pageNumber, int pageSize, string search) => db.Employees.Where(x => x.EFullName.Contains(search) || search == null).Include(e => e.Department).Include(e => e.Position).OrderBy(x=>x.EFullName).ToPagedList(pageNumber, pageSize);
@@ -141,6 +141,22 @@ namespace RedPetroleum.Models.Repositories
                 : db.Departments.Include(t => t.TaskLists).Where(e => e.DepartmentId == departmentId)
                  .Where(e =>
                     ((DateTime)e.TaskLists.FirstOrDefault().TaskDate) == taskDate).Select(e => e.TaskLists.Select(t => t.AverageMark).Average()).Average();
+        }
+
+        public IPagedList<Employee> Filter(int pageNumber, int pageSize, IPagedList<Employee> employees, string positionId, string departmentId)
+        {
+            
+            var rawData = (from e in db.Employees
+                           select e).ToList();
+            var employee = from e in rawData
+                           select e;
+
+            if (!String.IsNullOrEmpty(positionId))
+                employees = employee.Where(e => e.Position.PositionId.ToString() == positionId).ToPagedList(pageNumber, pageSize);
+            if (!String.IsNullOrEmpty(departmentId))
+                employees = employee.Where(e => e.Department.DepartmentId.ToString() == departmentId).ToPagedList(pageNumber, pageSize);
+            
+            return employees;
         }
     }
 }

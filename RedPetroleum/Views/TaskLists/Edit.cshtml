@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Редактирование";
+    var employeeId = Model.EmployeeId;
 }
 
 <h2>Редактирование задачи</h2>
@@ -11,23 +12,23 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.TaskListId)
-
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.TaskListId)
+    <div class="form-group">
         <div class="form-group">
             @Html.LabelFor(model => model.EmployeeId, "ФИО Сотрудника", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("EmployeeId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("EmployeeId", null, htmlAttributes: new { @class = "form-control localytics-chosen", @id = "employeeDropdown" })
                 @Html.ValidationMessageFor(model => model.EmployeeId, "", new { @class = "text-danger" })
             </div>
         </div>
-
+    </div>
         <div class="form-group">
             @Html.LabelFor(model => model.TaskName,"Наименование задачи", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TaskName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.TaskName, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
                 @Html.ValidationMessageFor(model => model.TaskName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -35,31 +36,41 @@
         <div class="form-group">
             @Html.LabelFor(model => model.TaskDuration,"Продолжительность задачи", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TaskDuration, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.TaskDuration, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
                 @Html.ValidationMessageFor(model => model.TaskDuration, "", new { @class = "text-danger" })
             </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TaskDate, "Дата задачи", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <input type="month" name="TaskDate" class="form-control" id="taskDate" value="@ViewBag.TaskDate" />
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.TaskDate, "Дата задачи", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <input type="month" name="TaskDate" class="form-control" id="taskDate" value="@ViewBag.TaskDate" />
         </div>
+    </div>
 
+    <div class="form-group">
         <div class="form-group">
             @Html.LabelFor(model => model.CommentEmployees, "Комментарий сотрудника", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CommentEmployees, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.CommentEmployees, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
                 @Html.ValidationMessageFor(model => model.CommentEmployees, "", new { @class = "text-danger" })
             </div>
         </div>
+    </div>
 
-        <div class="form-group">
-            <div class="btn-group" role="group">
-                <button type="submit" class="btn btn-success"><i class="fa fa-save" aria-hidden="true" title="Сохранить" data-toggle="tooltip" data-placement="top"><span style="padding: 5px;">Сохранить</span></i></button>
-                <a href="@Url.Action("Index", "TaskLists")" class="btn btn-info"><i class="fa fa-arrow-left" aria-hidden="true" title="Назад" data-toggle="tooltip" data-placement="top"><span style="padding: 5px;">Назад</span></i></a>
-            </div>
+    <div class="form-group">
+        <div class="btn-group" role="group">
+            <button type="submit" class="btn btn-success" onclick="backToFilteredTaskList(false);"><i class="fa fa-save" aria-hidden="true" title="Сохранить" data-toggle="tooltip" data-placement="top"><span style="padding: 5px;">Сохранить</span></i></button>
+            <a href="/TaskLists/GetFilteredTaskList?EmployeeId=@employeeId&taskDate=@ViewBag.TaskDate" class="btn btn-info"><i class="fa fa-arrow-left" aria-hidden="true" title="Назад" data-toggle="tooltip" data-placement="top"><span style="padding: 5px;">Назад</span></i></a>
         </div>
     </div>
+</div>
+
 }
+    <script>
+        $(function () {
+            $("#employeeDropdown").chosen();
+        })
+    </script>
+
