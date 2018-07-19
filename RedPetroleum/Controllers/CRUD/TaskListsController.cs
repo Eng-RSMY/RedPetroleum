@@ -205,7 +205,14 @@ namespace RedPetroleum.Controllers.CRUD
             var taskDate = ((DateTime)taskList.TaskDate).ToString("yyyy-MM");
             if (ModelState.IsValid)
             {
-                unitOfWork.TaskLists.Update(taskList);
+                var task = unitOfWork.TaskLists.Get(taskList.TaskListId);
+                task.CommentEmployees = taskList.CommentEmployees;
+                task.EmployeeId = taskList.EmployeeId;
+                task.TaskName = taskList.TaskName;
+                task.TaskDuration = taskList.TaskDuration;
+                task.TaskDate = taskList.TaskDate;
+
+                unitOfWork.TaskLists.Update(task);
                 await unitOfWork.SaveAsync();
                 return RedirectToAction("GetFilteredTaskList", new { DepartmentId = taskList.DepartmentId, EmployeeId = taskList.EmployeeId, taskDate = taskDate });
             }
@@ -429,7 +436,14 @@ namespace RedPetroleum.Controllers.CRUD
             var taskDate = ((DateTime)taskList.TaskDate).ToString("yyyy-MM");
             if (ModelState.IsValid)
             {
-                unitOfWork.TaskLists.Update(taskList);
+                var task = unitOfWork.TaskLists.Get(taskList.TaskListId);
+                task.CommentEmployees = taskList.CommentEmployees;
+                task.DepartmentId = taskList.DepartmentId;
+                task.TaskName = taskList.TaskName;
+                task.TaskDuration = taskList.TaskDuration;
+                task.TaskDate = taskList.TaskDate;
+
+                unitOfWork.TaskLists.Update(task);
                 await unitOfWork.SaveAsync();
                 return RedirectToAction("GetFilteredDepartmentTaskList", new { DepartmentId = taskList.DepartmentId, taskDate = taskDate });
             }
