@@ -21,7 +21,7 @@
         <div class="col-md-10">
             @if (ViewBag.DepartmentId != null && ViewBag.DepartmentId is SelectList)
             {
-                @Html.DropDownList("DepartmentId", null, new { @class = "form-control" })
+                @Html.DropDownList("DepartmentId", null, new { @class = "form-control localytics-chosen", @id = "departmentsDropdown" })
                 @Html.ValidationMessageFor(model => model.TaskName, "", new { @class = "text-danger" })
             }
             else
@@ -36,7 +36,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.TaskName, "Наименование задачи", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.TaskName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.TaskName, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
             @Html.ValidationMessageFor(model => model.TaskName, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -44,7 +44,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.TaskDuration, "Продолжительность задачи", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.TaskDuration, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.TaskDuration, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
             @Html.ValidationMessageFor(model => model.TaskDuration, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -59,7 +59,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.CommentEmployees, "Комментарий", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.CommentEmployees, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.EditorFor(model => model.CommentEmployees, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
             @Html.ValidationMessageFor(model => model.CommentEmployees, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -72,3 +72,8 @@
     </div>
 </div>
 }
+<script>
+    $(function () {
+        $("#departmentsDropdown").chosen();
+    })
+</script>

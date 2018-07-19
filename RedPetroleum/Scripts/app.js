@@ -232,7 +232,7 @@ function addTask(forDepartment = null, inputHtml = null) {
             <div class="row">
                 <label class="control-label col-md-4" for="TaskName">Задача</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskName" name="TaskName" required />
+                    <input type="text" class="form-control text-box single-line" autocomplete="off" id="TaskName" name="TaskName" required />
                 </div>
             </div>
         </div>
@@ -240,7 +240,7 @@ function addTask(forDepartment = null, inputHtml = null) {
             <div class="row">
                 <label class="control-label col-md-4" for="TaskDuration">Продолжительность</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskDuration" name="TaskDuration" required />
+                    <input type="text" class="form-control text-box single-line" autocomplete="off" id="TaskDuration" name="TaskDuration" required />
                 </div>
             </div>
         </div>
@@ -319,7 +319,7 @@ function submitTask(forDepartment = null) {
     return false;
 }
 
-function submitEditTask(forDepartment = null) {
+function submitEditTask(forDepartment = false) {
     var token = $('input[name="__RequestVerificationToken"]').val();
 
     var taskId = $("#generatedHtml").attr("data-taskid");
@@ -349,7 +349,7 @@ function submitEditTask(forDepartment = null) {
         "CommentEmployees": ""
     };
 
-    if (forDepartment != null) {
+    if (forDepartment) {
         var departmentId = $("#departmentsDropdown").val();
         var targetUrl = "/TaskLists/EditDepartmentTask";
         sendData["DepartmentId"] = departmentId;
@@ -419,7 +419,7 @@ function removeTask(taskId) {
     return false;
 }
 
-function editTask(forDepartment = null, taskId) {
+function editTask(forDepartment, taskId) {
     var token = $('input[name="__RequestVerificationToken"]').val();
 
     var taskRow = $("#" + taskId);
@@ -432,7 +432,7 @@ function editTask(forDepartment = null, taskId) {
             <div class="row">
                 <label class="control-label col-md-4" for="TaskName">Задача</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskName" name="TaskName" value="${taskName}" required />
+                    <input type="text" class="form-control text-box single-line" autocomplete="off" id="TaskName" name="TaskName" value="${taskName}" required />
                 </div>
             </div>
         </div>
@@ -440,7 +440,7 @@ function editTask(forDepartment = null, taskId) {
             <div class="row">
                 <label class="control-label col-md-4" for="TaskDuration">Продолжительность</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskDuration" name="TaskDuration" value="${taskDuration}" required />
+                    <input type="text" class="form-control text-box single-line" autocomplete="off" id="TaskDuration" name="TaskDuration" value="${taskDuration}" required />
                 </div>
             </div>
         </div>
@@ -450,7 +450,6 @@ function editTask(forDepartment = null, taskId) {
         </div>
     </div>
 `;
-
     addTask(forDepartment, generatedHtml);
 }
 

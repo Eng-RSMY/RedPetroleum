@@ -11,62 +11,69 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.EmployeeId)
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.EmployeeId)
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.EFullName, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.EFullName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Введите ФИО сотрудника", @required = "required" } })
-            @Html.ValidationMessageFor(model => model.EFullName, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.EFullName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.EFullName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Введите ФИО сотрудника", @autocomplete = "off", @required = "required" } })
+                @Html.ValidationMessageFor(model => model.EFullName, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.DepartmentId, "Отдел", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("DepartmentId", null, htmlAttributes: new { @class = "form-control", @required = "required" })
-            @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.DepartmentId, "Отдел", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("DepartmentId", null, htmlAttributes: new { @class = "form-control localytics-chosen", @required = "required", @id = "departmentDropdown" })
+                @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.PositionId, "Должность", htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("PositionId", null, htmlAttributes: new { @class = "form-control", @required = "required" })
-            @Html.ValidationMessageFor(model => model.PositionId, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.PositionId, "Должность", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("PositionId", null, htmlAttributes: new { @class = "form-control localytics-chosen", @required = "required", @id = "positionDropdown" })
+                @Html.ValidationMessageFor(model => model.PositionId, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.AdoptionDate, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.AdoptionDate, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
-            @Html.ValidationMessageFor(model => model.AdoptionDate, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.AdoptionDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AdoptionDate, new { htmlAttributes = new { @class = "form-control", @pattern = "(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}", @autocomplete = "off", @required = "required", @title = "ДД.ММ.ГГГГ" } })
+                @Html.ValidationMessageFor(model => model.AdoptionDate, "", new { @class = "text-danger" })
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Dismissed, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            <div class="checkbox">
-                @Html.EditorFor(model => model.Dismissed)
-                @Html.ValidationMessageFor(model => model.Dismissed, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Dismissed, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Dismissed)
+                    @Html.ValidationMessageFor(model => model.Dismissed, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="btn-group" role="group">
+                <button type="submit" class="btn btn-success"><i class="fa fa-save" aria-hidden="true" title="Сохранить" data-toggle="tooltip" data-placement="top"><span style="padding: 5px;">Сохранить</span></i></button>
+                <a href="@Url.Action("Index", "Employees")" class="btn btn-info"><i class="fa fa-arrow-left" aria-hidden="true" title="Назад" data-toggle="tooltip" data-placement="top"><span style="padding: 5px;">Назад</span></i></a>
             </div>
         </div>
     </div>
-
-    <div class="form-group">
-        <div class="btn-group" role="group">
-            <button type="submit" class="btn btn-success"><i class="fa fa-save" aria-hidden="true" title="Сохранить" data-toggle="tooltip" data-placement="top"><span style="padding: 5px;">Сохранить</span></i></button>
-            <a href="@Url.Action("Index", "Employees")" class="btn btn-info"><i class="fa fa-arrow-left" aria-hidden="true" title="Назад" data-toggle="tooltip" data-placement="top"><span style="padding: 5px;">Назад</span></i></a>
-        </div>
-    </div>
-</div>
 }
 <script>
     $("#Form").validate();
     $("#Form").removeAttr("novalidate");
+</script>
+
+<script>
+    $(function () {
+        $("#departmentDropdown").chosen();
+        $("#positionDropdown").chosen();
+    })
 </script>
