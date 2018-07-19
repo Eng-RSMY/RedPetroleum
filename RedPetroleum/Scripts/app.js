@@ -227,23 +227,17 @@ function addTask(forDepartment = null, inputHtml = null) {
         if (inputHtml == null) {
             var generatedHtml = `
     <div class="generatedHtml form-group row" id="generatedHtml">
-        <div class="col-md-5">
-            <div class="row">
-                <label class="control-label col-md-4" for="TaskName">Задача</label>
-                <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskName" name="TaskName" required />
-                </div>
-            </div>
+        <div class="col-md-7">
+            <small class="form-text text-muted">Задача</small>
+            <textarea class="form-control" id="TaskName" name="TaskName" rows="3" required></textarea>
+            
         </div>
-        <div class="col-md-5">
-            <div class="row">
-                <label class="control-label col-md-4" for="TaskDuration">Продолжительность</label>
-                <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskDuration" name="TaskDuration" required />
-                </div>
-            </div>
+        <div class="col-md-3">
+            <small class="form-text text-muted">Продолжительность</small>
+            <input type="text" class="form-control text-box single-line" id="TaskDuration" name="TaskDuration" required />
         </div>
         <div class="col-md-2">
+            <small class="form-text text-muted">Действия</small>
             <button type="button" class="btn btn-success" id="submitTask" onclick="submitTask(${forDepartment})" title="Сохранить"><span class="oi oi-check" title="Сохранить" aria-hidden="true"></span></button>
             <button type="button" class="btn btn-danger" id="removeGeneratedHtml" onclick="removeGeneratedHtml()"><span class="oi oi-x" title="Удалить" aria-hidden="true"></span></button>
         </div>
@@ -387,7 +381,7 @@ function submitEditTask(forDepartment = null) {
 }
 
 function saveOnEnter(forDepartment = null) {
-    $("#createArea").keypress(function (e) {
+    $("#TaskDuration").keypress(function (e) {
         if (e.keyCode === 13) {
             if ($("#submitTask").length > 0) {
                 submitTask(forDepartment);
@@ -427,23 +421,16 @@ function editTask(forDepartment = null, taskId) {
 
     var generatedHtml = `
     <div class="generatedHtml form-group row" id="generatedHtml" data-taskid="${taskId}">
-        <div class="col-md-5">
-            <div class="row">
-                <label class="control-label col-md-4" for="TaskName">Задача</label>
-                <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskName" name="TaskName" value="${taskName}" required />
-                </div>
-            </div>
+        <div class="col-md-7">
+            <small class="form-text text-muted">Продолжительность</small>
+            <textarea class="form-control" id="TaskName" name="TaskName" rows="3" required>${taskName}</textarea>
         </div>
-        <div class="col-md-5">
-            <div class="row">
-                <label class="control-label col-md-4" for="TaskDuration">Продолжительность</label>
-                <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskDuration" name="TaskDuration" value="${taskDuration}" required />
-                </div>
-            </div>
+        <div class="col-md-3">
+            <small class="form-text text-muted">Продолжительность</small>
+            <input type="text" class="form-control text-box single-line" id="TaskDuration" name="TaskDuration" value="${taskDuration}" required />
         </div>
         <div class="col-md-2">
+            <small class="form-text text-muted">Действия</small>
             <button type="button" class="btn btn-success" id="editTask" onclick="submitEditTask(${forDepartment})" title="Сохранить"><span class="oi oi-check" title="Сохранить" aria-hidden="true"></span></button>
             <button type="button" class="btn btn-danger" id="removeGeneratedHtml" onclick="removeGeneratedHtml()"><span class="oi oi-x" title="Удалить" aria-hidden="true"></span></button>
         </div>

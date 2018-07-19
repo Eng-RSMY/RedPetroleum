@@ -75,7 +75,7 @@
             var myModal = "myModal" + item.TaskListId;
             <tr id="comment_@item.TaskListId" class="task-row">
                 <td><b>@Html.DisplayFor(modelItem => item.Department.Name)</b></td>
-                <td><b>@Html.DisplayFor(modelItem => item.TaskName)</b></td>
+                <td class="taskName"><b>@Html.DisplayFor(modelItem => item.TaskName)</b></td>
                 <td><b>@Html.DisplayFor(motelItem => item.TaskDuration)</b></td>
                 <td><b>@(((DateTime)item.TaskDate).ToString("MM.yyyy"))</b></td>
                 <td style="text-align:right;">
