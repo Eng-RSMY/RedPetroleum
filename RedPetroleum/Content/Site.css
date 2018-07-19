@@ -13,3 +13,9 @@ mark, .mark {
 .taskName {
     white-space: pre-wrap;
 }
+
+.textarea-input {
+    width: 100%;
+    height: 150px;
+    min-height: 50px !important;
+}

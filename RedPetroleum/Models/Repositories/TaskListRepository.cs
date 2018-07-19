@@ -56,6 +56,7 @@ namespace RedPetroleum.Models.Repositories
 
         public void Update(TaskList item) => db.Entry(item).State = EntityState.Modified;
 
+
         public ApplicationUser GetUser(string id)
         {
             return db.Users.Find(id);

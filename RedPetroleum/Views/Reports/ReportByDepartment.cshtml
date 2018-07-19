@@ -68,14 +68,20 @@
         // $("#chartContainer").css("visibility", "visible");
         var departmentName = $("#nameDep").text();
         var dataPoints = [];
-        var i = @i;
+        var i = 0;
+
         var marks = document.getElementsByClassName("mark");
+        Array.from(marks).forEach(v => {
+            ++i;
+        });
         var employees = document.getElementsByClassName("employee");
-        for (var j = 0; j <= i; j++) {
+        console.log(i);
+        for (var j = i-1; j >= 0; j--) {
 
             let str = marks[j].textContent.split("").reverse().join("").slice(2);
             let reversed = str.substring().split("").reverse().join("");
-            dataPoints.push({ y: parseFloat(reversed.replace(',','.')), label: employees[j].textContent });
+            dataPoints.push({ y: parseFloat(reversed.replace(',', '.')), label: employees[j].textContent });
+            console.log(parseFloat(reversed.replace(',', '.')));
         }
         var chart = new CanvasJS.Chart("chartContainer", {
             animationEnabled: true,
