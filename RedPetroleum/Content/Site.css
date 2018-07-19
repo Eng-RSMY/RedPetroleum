@@ -9,3 +9,7 @@
 mark, .mark {
     background-color: transparent;
 }
+
+.taskName {
+    white-space: pre-wrap;
+}
