@@ -143,58 +143,6 @@ namespace RedPetroleum.Controllers
 
             return View(model);
         }
-        ////Edit
-        //public ActionResult Edit(string id)
-        //{
-            
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    var user = UserManager.FindById(id);
-        //    if (user == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-
-        //    ViewBag.Rol = new SelectList(db.Roles, "Id", "Name", user.Roles.SingleOrDefault().RoleId);
-        //    ViewBag.Emp = new SelectList(db.Employees, "EmployeeId", "EFullName", user.EmployeeId);
-        //    return View(user);
-        //}
-
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(ApplicationUser user, string RoleId, string EmployeeId)
-        //{
-        //    var users = db.Employees.Select(c => new {
-        //        c.EmployeeId,
-        //        EFullname = c.EFullName
-        //    }).ToList();
-            
-        //    ViewBag.SelectedRole = new SelectList(db.Roles, "Id", "Name");
-        //    ViewBag.EmployeeId = new SelectList(users, "EmployeeId", "EFullName");
-        //    if (ModelState.IsValid)
-        //    {
-        //        var oldUser = UserManager.FindById(user.Id);
-        //        var oldRoleId = oldUser.Roles.SingleOrDefault().RoleId;
-        //        var oldRoleName = db.Roles.SingleOrDefault(r => r.Id == oldRoleId).Name;
-        //        var newRoleName = db.Roles.SingleOrDefault(r => r.Id == RoleId).Name;
-
-        //        if (oldRoleName != newRoleName)
-        //        {
-        //            UserManager.RemoveFromRole(user.Id, oldRoleName);
-        //            UserManager.AddToRole(user.Id, newRoleName);
-        //        }
-                
-        //        user.EmployeeId = EmployeeId;
-        //        db.Entry(user).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("UserList");
-        //    }
-        //    return View(user);
-        //}
 
         public ActionResult Delete(string id)
         {
@@ -307,7 +255,7 @@ namespace RedPetroleum.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        [Authorize(Roles = "admin")]
         public ActionResult Register()
         {
            
@@ -320,7 +268,7 @@ namespace RedPetroleum.Controllers
         // 
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "admin")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model, string SelectedRole)
         {

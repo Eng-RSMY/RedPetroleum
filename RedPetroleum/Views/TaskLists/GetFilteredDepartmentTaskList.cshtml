@@ -9,7 +9,7 @@
 
 <h2>Задачи ГД</h2>
 <p>
-    <a href="/TaskLists/CreateDepartmentTask@(ViewBag.SelectedDate != null ? "?taskDate="+ViewBag.SelectedDate : null)" id="addTaskBtn" class="btn btn-primary" type="button">
+    <a href="#"id="addTaskBtn" class="btn btn-primary" type="button" onclick="updateAddTaskUrl(true)">
         <i class="fa fa-plus"></i> Добавить задачу
     </a>
 </p>
@@ -18,7 +18,7 @@
     @Html.AntiForgeryToken()
     <div class="row">
         <div class="col-md-11 search-div">
-            <input type="text" id="searching" name="searching" class="form-control search" placeholder="Введите наименование задачи" onchange="form.submit();"
+            <input type="text" id="searching" name="searching" class="form-control search" autocomplete="off" placeholder="Введите наименование задачи" onchange="form.submit();"
                    style="border: 1px solid; border-color: #008cba;" />
         </div>
         <div class="col-md-1 search-div-btn">
@@ -40,7 +40,7 @@
         <div class="col-md-4">
             @if (ViewBag.DepartmentId != null && ViewBag.DepartmentId is SelectList)
             {
-                @Html.DropDownList("DepartmentId", ViewBag.DepartmentId as SelectList, "Выберите отдел", htmlAttributes: new { @class = "form-control", @id = "departmentsDropdown" })
+                @Html.DropDownList("DepartmentId", ViewBag.DepartmentId as SelectList, "Выберите отдел", htmlAttributes: new { @class = "form-control localytics-chosen", @id = "departmentsDropdown" })
             }
             else
             {
@@ -75,7 +75,7 @@
             var myModal = "myModal" + item.TaskListId;
             <tr id="comment_@item.TaskListId" class="task-row">
                 <td><b>@Html.DisplayFor(modelItem => item.Department.Name)</b></td>
-                <td><b>@Html.DisplayFor(modelItem => item.TaskName)</b></td>
+                <td class="taskName"><b>@Html.DisplayFor(modelItem => item.TaskName)</b></td>
                 <td><b>@Html.DisplayFor(motelItem => item.TaskDuration)</b></td>
                 <td><b>@(((DateTime)item.TaskDate).ToString("MM.yyyy"))</b></td>
                 <td style="text-align:right;">
@@ -116,13 +116,13 @@
             {
                 <tr id="@item.TaskListId">
                     <td class="mark-field">
-                        <input type="text" class="form-control AverageMark" name="AverageMark" value="@item.AverageMark" />
+                        <input type="text" class="form-control AverageMark" name="AverageMark" value="@item.AverageMark" disabled />
                         <small class="form-text text-muted">Оценка</small>
                     </td>
                     <td class="comment-field" data-taskid="@item.TaskListId" colspan="3">@Html.DisplayFor(modelItem => item.CommentEmployees)</td>
                     <td style="text-align:right;">
                         <span class="submit-button"><button type="button" class="btn btn-primary" onclick="taskComment('@item.TaskListId', true)">Комментарий</button></span>
-                        <button id="saveMarks" class="btn btn-success" type="button" onclick="rateDepartmentTask('@item.TaskListId')">Оценить</button>
+                        <span class="markBtnTd"><button id="saveMarks" class="btn btn-success" type="button" onclick="rateDepartmentTask('@item.TaskListId')">Оценить</button></span>
                     </td>
                 </tr>
             }
@@ -154,4 +154,9 @@
 <script>
     submitCommentOnEnter(true)
     submitMarkOnEnter()
+</script>
+<script>
+    $(function () {
+        $("#departmentsDropdown").chosen();
+    })
 </script>

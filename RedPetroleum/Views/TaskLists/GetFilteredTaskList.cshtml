@@ -10,7 +10,7 @@
 <h2>Задачи для сотрудников</h2>
 
 <p>
-    <a href="/TaskLists/Create@(ViewBag.SelectedDate != null ? "?taskDate="+ViewBag.SelectedDate : null)" type="button" id="addTaskBtn" class="btn btn-primary">
+    <a href="#" type="button" id="addTaskBtn" class="btn btn-primary" onclick="updateAddTaskUrl(false)">
         <i class="fa fa-plus"></i>
         Добавить задачу
     </a>
@@ -23,7 +23,7 @@
     <!-- Search  -->
     <div class="row">
         <div class="col-md-11 search-div">
-            <input type="text" id="searching" name="searching" class="form-control search" placeholder="Введите наименование задачи" onchange="form.submit();"
+            <input type="text" id="searching" name="searching" class="form-control search" autocomplete="off" placeholder="Введите наименование задачи" onchange="form.submit();"
                    style="border: 1px solid; border-color: #008cba;" />
         </div>
         <div class="col-md-1 search-div-btn">
@@ -45,7 +45,7 @@
         <div class="col-md-3">
             @if (ViewBag.DepartmentId != null && ViewBag.DepartmentId is SelectList)
             {
-                @Html.DropDownList("DepartmentId", ViewBag.DepartmentId as SelectList, "Выберите отдел", htmlAttributes: new { @class = "form-control", @id = "departmentsDropdown" })
+                @Html.DropDownList("DepartmentId", ViewBag.DepartmentId as SelectList, "Выберите отдел", htmlAttributes: new { @class = "form-control localytics-chosen", @id = "departmentsDropdown" })
             }
             else
             {
@@ -55,7 +55,7 @@
             }
         </div>
         <div class="col-md-3">
-            @Html.DropDownList("EmployeeId", ViewBag.EmployeeId as SelectList, "Выберите сотрудника", htmlAttributes: new { @class = "form-control", @id = "employeesDropdown" })
+            @Html.DropDownList("EmployeeId", ViewBag.EmployeeId as SelectList, "Выберите сотрудника", htmlAttributes: new { @class = "form-control", @id = "employeesDropdown", onchange= "updateAddTaskUrl(false)"})
         </div>
         <div class="col-md-2">
             <input class="form-control" id="taskDate" type="month" name="taskDate" @(ViewBag.SelectedDate != null ? "value=" + ViewBag.SelectedDate : null) onchange="updateAddTaskUrl(false)">
@@ -86,7 +86,7 @@
             var myModal = "myModal" + item.TaskListId;
             <tr id="comment_@item.TaskListId" class="task-row">
                 <td><b>@Html.DisplayFor(modelItem => item.Employee.EFullName)</b></td>
-                <td><b>@Html.DisplayFor(modelItem => item.TaskName)</b></td>
+                <td class="taskName"><b>@Html.DisplayFor(modelItem => item.TaskName)</b></td>
                 <td><b>@Html.DisplayFor(modelItem => item.TaskDuration)</b></td>
                 <td><b>@(((DateTime)item.TaskDate).ToString("MM.yyyy"))</b></td>
                 <td class="comment-field"><b>@Html.DisplayFor(modelItem => item.CommentEmployees)</b></td>
@@ -129,27 +129,27 @@
             {
                 <tr id="@item.TaskListId">
                     <td>
-                        <input type="number" class="form-control SkillMark" name="SkillMark" value="@item.SkillMark" />
+                        <input type="number" class="form-control SkillMark" name="SkillMark" value="@item.SkillMark" disabled />
                         <small class="form-text text-muted">Компетентность</small>
                     </td>
                     <td>
-                        <input type="number" class="form-control EffectivenessMark" name="EffectivenessMark" value="@item.EffectivenessMark" />
+                        <input type="number" class="form-control EffectivenessMark" name="EffectivenessMark" value="@item.EffectivenessMark" disabled />
                         <small class="form-text text-muted">Результативность</small>
                     </td>
                     <td>
-                        <input type="number" class="form-control DisciplineMark" name="DisciplineMark" value="@item.DisciplineMark" />
+                        <input type="number" class="form-control DisciplineMark" name="DisciplineMark" value="@item.DisciplineMark" disabled />
                         <small class="form-text text-muted">Дисциплинированность</small>
                     </td>
                     <td>
-                        <input type="number" class="form-control TimelinessMark" name="TimelinessMark" value="@item.TimelinessMark" />
+                        <input type="number" class="form-control TimelinessMark" name="TimelinessMark" value="@item.TimelinessMark" disabled />
                         <small class="form-text text-muted">Своевременность</small>
                     </td>
                     <td>
                         <input type="text" class="form-control AverageMark" name="AverageMark" value="@item.AverageMark" disabled />
                         <small class="form-text text-muted">Среднее</small>
                     </td>
-                    <td>
-                        <button id="saveMarks" class="btn btn-link" type="button" onclick="rate('@item.TaskListId')">Сохранить</button>
+                    <td class="markBtnTd">
+                        <button id="saveMarks" class="btn btn-primary" type="button" onclick="rate('@item.TaskListId')">Оценить</button>
                     </td>
                 </tr>
             }
@@ -164,4 +164,10 @@
 <script src="~/Scripts/app.js"></script>
 <script>
     submitCommentOnEnter()
+</script>
+<script>
+    $(function () {
+        $("#departmentsDropdown").chosen();
+        $("#employeesDropdown").chosen();
+    })
 </script>

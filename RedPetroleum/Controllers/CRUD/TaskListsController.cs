@@ -25,7 +25,7 @@ namespace RedPetroleum.Controllers.CRUD
 
         // GET: TaskLists
         [Authorize(Roles = "admin, manager, employee")]
-        public ActionResult Index(int? page, string searching, string taskDate = null)
+        public ActionResult Index(int? page, string searching, string taskDate = null, string employeeId = null)
         {
             var currentUser = unitOfWork.TaskLists.GetUser(User.Identity.GetUserId());
             
@@ -34,7 +34,7 @@ namespace RedPetroleum.Controllers.CRUD
                 ViewBag.EmployeeId = CreateEmployeeSelectList(
                     unitOfWork
                         .Employees
-                        .GetAllWithoutRelations());
+                        .GetAllWithoutRelations(), employeeId);
 
                 ViewBag.DepartmentId = CreateDepartmentSelectList();
             }
@@ -43,13 +43,13 @@ namespace RedPetroleum.Controllers.CRUD
                 ViewBag.EmployeeId = CreateEmployeeSelectList(
                     unitOfWork
                         .Employees
-                        .GetAvailableEmployees(User.Identity.GetUserId()));
+                        .GetAvailableEmployees(User.Identity.GetUserId()), employeeId);
 
                 ViewBag.Department = unitOfWork
                     .Departments
                     .GetDepartmentByUserId(User.Identity.GetUserId());
             }
-
+            
 
             ViewBag.Today = taskDate == null ? DateTime.Now.ToString("yyyy-MM") : taskDate;
             
@@ -78,16 +78,16 @@ namespace RedPetroleum.Controllers.CRUD
         }
 
         // GET: TaskLists/Create
-        public ActionResult Create(string taskDate = null)
+        public ActionResult Create(string taskDate = null, string employeeId = null)
         {
             if (User.IsInRole("admin"))
             {
-                ViewBag.EmployeeId = new SelectList(unitOfWork.Employees.GetAll(), "EmployeeId", "EFullName");
+                ViewBag.EmployeeId = new SelectList(unitOfWork.Employees.GetAll(), "EmployeeId", "EFullName", employeeId);
             } else
             {
                 ViewBag.EmployeeId = new SelectList(unitOfWork.Employees.GetAvailableEmployees(User.Identity.GetUserId()), "EmployeeId", "EFullName");
             }
-
+            ViewBag.Employees = unitOfWork.Employees.GetAll();
             ViewBag.SelectedDate = taskDate ?? DateTime.Now.ToString("yyyy-MM");
 
             return View();
@@ -202,12 +202,12 @@ namespace RedPetroleum.Controllers.CRUD
         {
             if (taskList.TaskDate == null)
                 taskList.TaskDate = DateTime.Today;
-
+            var taskDate = ((DateTime)taskList.TaskDate).ToString("yyyy-MM");
             if (ModelState.IsValid)
             {
                 unitOfWork.TaskLists.Update(taskList);
                 await unitOfWork.SaveAsync();
-                return RedirectToAction("Index");
+                return RedirectToAction("GetFilteredTaskList", new { DepartmentId = taskList.DepartmentId, EmployeeId = taskList.EmployeeId, taskDate = taskDate });
             }
             ViewBag.EmployeeId = new SelectList(unitOfWork.Employees.GetAvailableEmployees(User.Identity.GetUserId()), "EmployeeId", "EFullName", taskList.EmployeeId);
             return View(taskList);
@@ -302,7 +302,7 @@ namespace RedPetroleum.Controllers.CRUD
         {
             if (String.IsNullOrEmpty(mark)) return 0;
             double number;
-            if (double.TryParse(mark, out number))
+            if (double.TryParse(mark.Replace('.', ','), out number))
                 return number;
 
             throw new FormatException();
@@ -311,13 +311,13 @@ namespace RedPetroleum.Controllers.CRUD
         /************ Department Tasks ************/
 
         [Authorize(Roles = "admin, manager, employee")]
-        public ActionResult DepartmentTasks(int? page, string searching, string taskDate = null)
+        public ActionResult DepartmentTasks(int? page, string searching, string taskDate = null, string departmentId = null)
         {
             var currentUser = unitOfWork.TaskLists.GetUser(User.Identity.GetUserId());
             
             if (User.IsInRole("admin"))
             {
-                ViewBag.DepartmentId = CreateDepartmentSelectList();
+                ViewBag.DepartmentId = CreateDepartmentSelectList(departmentId);
             }
             else
             {
@@ -354,10 +354,10 @@ namespace RedPetroleum.Controllers.CRUD
             return View(taskList.ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult CreateDepartmentTask(string taskDate = null)
+        public ActionResult CreateDepartmentTask(string taskDate = null, string departmentId = null)
         {
             if (User.IsInRole("admin"))
-                ViewBag.DepartmentId = CreateDepartmentSelectList();
+                ViewBag.DepartmentId = CreateDepartmentSelectList(departmentId);
             else
                 ViewBag.Department = unitOfWork
                     .Departments
@@ -426,12 +426,12 @@ namespace RedPetroleum.Controllers.CRUD
         {
             if (taskList.TaskDate == null)
                 taskList.TaskDate = DateTime.Today;
-
+            var taskDate = ((DateTime)taskList.TaskDate).ToString("yyyy-MM");
             if (ModelState.IsValid)
             {
                 unitOfWork.TaskLists.Update(taskList);
                 await unitOfWork.SaveAsync();
-                return RedirectToAction("DepartmentTasks");
+                return RedirectToAction("GetFilteredDepartmentTaskList", new { DepartmentId = taskList.DepartmentId, taskDate = taskDate });
             }
 
             if (User.IsInRole("admin"))

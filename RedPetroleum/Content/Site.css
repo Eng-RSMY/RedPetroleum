@@ -1,3 +1,4 @@
+
 .search-div{
     padding-right: 0px;
 }
@@ -7,4 +8,8 @@
 
 mark, .mark {
     background-color: transparent;
+}
+
+.taskName {
+    white-space: pre-wrap;
 }

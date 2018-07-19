@@ -1,3 +1,4 @@
+
 //This function for show and update DataTable ReportByDepartment on View
 function updateDepartmentTable() {
     var token = $('input[name="__RequestVerificationToken"]').val();
@@ -217,7 +218,7 @@ function addTask(forDepartment = null, inputHtml = null) {
         var warningMessage = `
     <div class="alert alert-warning  alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong>Сохраните задачу</strong>
+        <strong>Закройте поля для заполнения задачи (красный крестик ниже)</strong>
     </div>
 `;
         createArea.prepend(warningMessage);
@@ -227,23 +228,16 @@ function addTask(forDepartment = null, inputHtml = null) {
         if (inputHtml == null) {
             var generatedHtml = `
     <div class="generatedHtml form-group row" id="generatedHtml">
-        <div class="col-md-5">
-            <div class="row">
-                <label class="control-label col-md-4" for="TaskName">Задача</label>
-                <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskName" name="TaskName" required />
-                </div>
-            </div>
+        <div class="col-md-7">
+            <small class="form-text text-muted">Задача</small>
+            <textarea class="form-control" id="TaskName" name="TaskName" rows="3" required></textarea>
         </div>
-        <div class="col-md-5">
-            <div class="row">
-                <label class="control-label col-md-4" for="TaskDuration">Продолжительность</label>
-                <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskDuration" name="TaskDuration" required />
-                </div>
-            </div>
+        <div class="col-md-3">
+            <small class="form-text text-muted">Продолжительность</small>
+            <input type="text" class="form-control text-box single-line" id="TaskDuration" name="TaskDuration" required />
         </div>
         <div class="col-md-2">
+            <small class="form-text text-muted">Действия</small>
             <button type="button" class="btn btn-success" id="submitTask" onclick="submitTask(${forDepartment})" title="Сохранить"><span class="oi oi-check" title="Сохранить" aria-hidden="true"></span></button>
             <button type="button" class="btn btn-danger" id="removeGeneratedHtml" onclick="removeGeneratedHtml()"><span class="oi oi-x" title="Удалить" aria-hidden="true"></span></button>
         </div>
@@ -318,7 +312,7 @@ function submitTask(forDepartment = null) {
     return false;
 }
 
-function submitEditTask(forDepartment = null) {
+function submitEditTask(forDepartment = false) {
     var token = $('input[name="__RequestVerificationToken"]').val();
 
     var taskId = $("#generatedHtml").attr("data-taskid");
@@ -348,7 +342,7 @@ function submitEditTask(forDepartment = null) {
         "CommentEmployees": ""
     };
 
-    if (forDepartment != null) {
+    if (forDepartment) {
         var departmentId = $("#departmentsDropdown").val();
         var targetUrl = "/TaskLists/EditDepartmentTask";
         sendData["DepartmentId"] = departmentId;
@@ -387,7 +381,7 @@ function submitEditTask(forDepartment = null) {
 }
 
 function saveOnEnter(forDepartment = null) {
-    $("#createArea").keypress(function (e) {
+    $("#TaskDuration").keypress(function (e) {
         if (e.keyCode === 13) {
             if ($("#submitTask").length > 0) {
                 submitTask(forDepartment);
@@ -418,7 +412,7 @@ function removeTask(taskId) {
     return false;
 }
 
-function editTask(forDepartment = null, taskId) {
+function editTask(forDepartment, taskId) {
     var token = $('input[name="__RequestVerificationToken"]').val();
 
     var taskRow = $("#" + taskId);
@@ -427,29 +421,21 @@ function editTask(forDepartment = null, taskId) {
 
     var generatedHtml = `
     <div class="generatedHtml form-group row" id="generatedHtml" data-taskid="${taskId}">
-        <div class="col-md-5">
-            <div class="row">
-                <label class="control-label col-md-4" for="TaskName">Задача</label>
-                <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskName" name="TaskName" value="${taskName}" required />
-                </div>
-            </div>
+        <div class="col-md-7">
+            <small class="form-text text-muted">Задача</small>
+            <textarea class="form-control" id="TaskName" name="TaskName" rows="3" required>${taskName}</textarea>
         </div>
-        <div class="col-md-5">
-            <div class="row">
-                <label class="control-label col-md-4" for="TaskDuration">Продолжительность</label>
-                <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskDuration" name="TaskDuration" value="${taskDuration}" required />
-                </div>
-            </div>
+        <div class="col-md-3">
+            <small class="form-text text-muted">Продолжительность</small>
+            <input type="text" class="form-control text-box single-line" id="TaskDuration" name="TaskDuration" value="${taskDuration}" required />
         </div>
         <div class="col-md-2">
+            <small class="form-text text-muted">Действия</small>
             <button type="button" class="btn btn-success" id="editTask" onclick="submitEditTask(${forDepartment})" title="Сохранить"><span class="oi oi-check" title="Сохранить" aria-hidden="true"></span></button>
             <button type="button" class="btn btn-danger" id="removeGeneratedHtml" onclick="removeGeneratedHtml()"><span class="oi oi-x" title="Удалить" aria-hidden="true"></span></button>
         </div>
     </div>
 `;
-
     addTask(forDepartment, generatedHtml);
 }
 
@@ -550,13 +536,13 @@ function submitDepartmentRate(taskId) {
 function taskComment(taskId, forDepartment = false) {
     var taskRow = $("#comment_" + taskId);
     var saveBtnTemplate = `
-    <button type="button" class="btn btn-success" onclick="submitComment('${taskId}')" title="Сохранить"><span class="oi oi-check" title="Сохранить" aria-hidden="true"></span></button>
+    <button type="button" class="btn btn-success" onclick="submitComment('${taskId}')" title="Сохранить"><i class="fa fa-check" title="Сохранить"  aria-hidden="true"></i></button>
 `;
 
     if (forDepartment) {
         taskRow = $("#" + taskId);
         saveBtnTemplate = `
-    <button type="button" class="btn btn-primary" onclick="submitComment('${taskId}', true)" title="Сохранить"><span class="oi oi-check" title="Сохранить" aria-hidden="true"></span></button>
+    <button type="button" class="btn btn-primary" onclick="submitComment('${taskId}', true)" title="Сохранить"><i class="fa fa-check" title="Сохранить"  aria-hidden="true"></i></button>
 `;
     }
     var commentField = taskRow.find(".comment-field");
@@ -641,26 +627,26 @@ function submitMarkOnEnter() {
 
 function updateAddTaskUrl(forDepartment) {
     var selectedDate = $("#taskDate").val();
-    
-
+    var selectedDepartment = $("#departmentsDropdown").val();
+    var selectedEmployee = $("#employeesDropdown").val();
     if (forDepartment) {
         $("#addTaskBtn")
-            .attr("href", "/TaskLists/CreateDepartmentTask?taskDate=" + selectedDate);
+            .attr("href", "/TaskLists/CreateDepartmentTask?DepartmentId=" + selectedDepartment + "&taskDate=" + selectedDate);
     } else {
         $("#addTaskBtn")
-            .attr("href", "/TaskLists/Create?taskDate=" + selectedDate);
+            .attr("href", "/TaskLists/Create?EmployeeId=" + selectedEmployee + "&taskDate=" + selectedDate);
     }
 }
 
-function submitDateToIndexPage(forDepartment) {
+function submitParamsToIndexPage(forDepartment) {
     var selectedDate = $("#taskDate").val();
-
-
+    var selectedDepartment = $("#departmentsDropdown").val();
+    var selectedEmployee = $("#employeesDropdown").val();
     if (forDepartment) {
         $("#getIndex")
-            .attr("href", "/TaskLists/DepartmentTasks?taskDate=" + selectedDate);
+            .attr("href", "/TaskLists/GetFilteredDepartmentTaskList?DepartmentId=" + selectedDepartment + "&taskDate=" + selectedDate);
     } else {
         $("#getIndex")
-            .attr("href", "/TaskLists/Index?taskDate=" + selectedDate);
+            .attr("href", "/TaskLists/GetFilteredTaskList?EmployeeId=" + selectedEmployee + "&taskDate=" + selectedDate);
     }
 }

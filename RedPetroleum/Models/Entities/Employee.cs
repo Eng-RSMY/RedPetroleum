@@ -18,15 +18,8 @@ namespace RedPetroleum.Models.Entities
         
         public Guid PositionId { get; set; }
 
-        [Display(Name = "Дата рождения")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime DateBorn { get; set; }
-
         [Display(Name = "Дата принятия")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime AdoptionDate { get; set; }
+        public string AdoptionDate { get; set; }
 
         [Display(Name = "Уволен")]
         public bool Dismissed { get; set; }
