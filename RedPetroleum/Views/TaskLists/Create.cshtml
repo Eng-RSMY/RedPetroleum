@@ -15,7 +15,8 @@
             <label for="employee">Выберите сотрудника</label>
         </div>
         <div class="col-md-3">
-            @Html.DropDownList("EmployeeId", null, "Выберите сотрудника", htmlAttributes: new { @class = "form-control", @id = "employeesDropdown", onchange = "submitParamsToIndexPage(true)" })
+            @Html.DropDownList("EmployeeId", null, htmlAttributes: new { @class = "form-control localytics-chosen", @id = "employeesDropdown", onchange = "submitParamsToIndexPage(true)", @required = "required" })
+            @Html.ValidationMessageFor(model => model.Employee.EFullName, "", new { @class = "text-danger" })
         </div>
     </div>
     <br />
