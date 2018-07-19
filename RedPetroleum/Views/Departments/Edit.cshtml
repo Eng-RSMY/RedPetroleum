@@ -19,7 +19,7 @@
     <div class="form-group">
         <label class="control-label col-md-2">Наименование отдела</label>
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @required = "required"} })
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control",@autocomplete = "off", @required = "required"} })
             @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
             <h6 class="text-danger">@ViewBag.Message</h6>
         </div>
@@ -28,7 +28,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.ParentId, "Управляющий отдел", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.DropDownList("ParentId", null, "Убрать управляющий отдел", htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownList("ParentId", null, "Убрать управляющий отдел", htmlAttributes: new { @class = "form-control", @id = "parentDepartmentDropdown" })
             @Html.ValidationMessageFor(model => model.ParentId, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -41,3 +41,8 @@
     </div>
 </div>
 }
+<script>
+    $(function () {
+        $("#parentDepartmentDropdown").chosen();
+    })
+</script>

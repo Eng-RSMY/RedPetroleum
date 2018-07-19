@@ -218,7 +218,7 @@ function addTask(forDepartment = null, inputHtml = null) {
         var warningMessage = `
     <div class="alert alert-warning  alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <strong>Сохраните задачу</strong>
+        <strong>Закройте поля для заполнения задачи (красный крестик ниже)</strong>
     </div>
 `;
         createArea.prepend(warningMessage);
@@ -232,7 +232,7 @@ function addTask(forDepartment = null, inputHtml = null) {
             <div class="row">
                 <label class="control-label col-md-4" for="TaskName">Задача</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskName" name="TaskName" required />
+                    <input type="text" class="form-control text-box single-line" autocomplete="off" id="TaskName" name="TaskName" required />
                 </div>
             </div>
         </div>
@@ -240,13 +240,13 @@ function addTask(forDepartment = null, inputHtml = null) {
             <div class="row">
                 <label class="control-label col-md-4" for="TaskDuration">Продолжительность</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskDuration" name="TaskDuration" required />
+                    <input type="text" class="form-control text-box single-line" autocomplete="off" id="TaskDuration" name="TaskDuration" required />
                 </div>
             </div>
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-success" id="submitTask" onclick="submitTask(${forDepartment})" title="Сохранить"><span class="oi oi-check" title="Сохранить" aria-hidden="true"></span></button>
-            <button type="button" class="btn btn-danger" id="removeGeneratedHtml" onclick="removeGeneratedHtml()"><span class="oi oi-x" title="Удалить" aria-hidden="true"></span></button>
+            <button type="button" class="btn btn-success" id="submitTask" onclick="submitTask(${forDepartment})" title="Сохранить"><i class="fa fa-check" title="Сохранить"  aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-danger" id="removeGeneratedHtml" onclick="removeGeneratedHtml()"><i class="fa fa-times" title="Удалить" aria-hidden="true"></i></button>
         </div>
     </div>
 `;
@@ -319,7 +319,7 @@ function submitTask(forDepartment = null) {
     return false;
 }
 
-function submitEditTask(forDepartment = null) {
+function submitEditTask(forDepartment = false) {
     var token = $('input[name="__RequestVerificationToken"]').val();
 
     var taskId = $("#generatedHtml").attr("data-taskid");
@@ -349,7 +349,7 @@ function submitEditTask(forDepartment = null) {
         "CommentEmployees": ""
     };
 
-    if (forDepartment != null) {
+    if (forDepartment) {
         var departmentId = $("#departmentsDropdown").val();
         var targetUrl = "/TaskLists/EditDepartmentTask";
         sendData["DepartmentId"] = departmentId;
@@ -419,7 +419,7 @@ function removeTask(taskId) {
     return false;
 }
 
-function editTask(forDepartment = null, taskId) {
+function editTask(forDepartment, taskId) {
     var token = $('input[name="__RequestVerificationToken"]').val();
 
     var taskRow = $("#" + taskId);
@@ -432,7 +432,7 @@ function editTask(forDepartment = null, taskId) {
             <div class="row">
                 <label class="control-label col-md-4" for="TaskName">Задача</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskName" name="TaskName" value="${taskName}" required />
+                    <input type="text" class="form-control text-box single-line" autocomplete="off" id="TaskName" name="TaskName" value="${taskName}" required />
                 </div>
             </div>
         </div>
@@ -440,17 +440,16 @@ function editTask(forDepartment = null, taskId) {
             <div class="row">
                 <label class="control-label col-md-4" for="TaskDuration">Продолжительность</label>
                 <div class="col-md-8">
-                    <input type="text" class="form-control text-box single-line" id="TaskDuration" name="TaskDuration" value="${taskDuration}" required />
+                    <input type="text" class="form-control text-box single-line" autocomplete="off" id="TaskDuration" name="TaskDuration" value="${taskDuration}" required />
                 </div>
             </div>
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-success" id="editTask" onclick="submitEditTask(${forDepartment})" title="Сохранить"><span class="oi oi-check" title="Сохранить" aria-hidden="true"></span></button>
-            <button type="button" class="btn btn-danger" id="removeGeneratedHtml" onclick="removeGeneratedHtml()"><span class="oi oi-x" title="Удалить" aria-hidden="true"></span></button>
+            <button type="button" class="btn btn-success" id="editTask" onclick="submitEditTask(${forDepartment})" title="Сохранить"><i class="fa fa-check" title="Сохранить"  aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-danger" id="removeGeneratedHtml" onclick="removeGeneratedHtml()"><i class="fa fa-times" title="Удалить" aria-hidden="true"></i></button>
         </div>
     </div>
 `;
-
     addTask(forDepartment, generatedHtml);
 }
 
@@ -551,13 +550,13 @@ function submitDepartmentRate(taskId) {
 function taskComment(taskId, forDepartment = false) {
     var taskRow = $("#comment_" + taskId);
     var saveBtnTemplate = `
-    <button type="button" class="btn btn-success" onclick="submitComment('${taskId}')" title="Сохранить"><span class="oi oi-check" title="Сохранить" aria-hidden="true"></span></button>
+    <button type="button" class="btn btn-success" onclick="submitComment('${taskId}')" title="Сохранить"><i class="fa fa-check" title="Сохранить"  aria-hidden="true"></i></button>
 `;
 
     if (forDepartment) {
         taskRow = $("#" + taskId);
         saveBtnTemplate = `
-    <button type="button" class="btn btn-primary" onclick="submitComment('${taskId}', true)" title="Сохранить"><span class="oi oi-check" title="Сохранить" aria-hidden="true"></span></button>
+    <button type="button" class="btn btn-primary" onclick="submitComment('${taskId}', true)" title="Сохранить"><i class="fa fa-check" title="Сохранить"  aria-hidden="true"></i></button>
 `;
     }
     var commentField = taskRow.find(".comment-field");

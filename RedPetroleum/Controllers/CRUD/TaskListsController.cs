@@ -49,7 +49,7 @@ namespace RedPetroleum.Controllers.CRUD
                     .Departments
                     .GetDepartmentByUserId(User.Identity.GetUserId());
             }
-
+            
 
             ViewBag.Today = taskDate == null ? DateTime.Now.ToString("yyyy-MM") : taskDate;
             
@@ -87,7 +87,7 @@ namespace RedPetroleum.Controllers.CRUD
             {
                 ViewBag.EmployeeId = new SelectList(unitOfWork.Employees.GetAvailableEmployees(User.Identity.GetUserId()), "EmployeeId", "EFullName");
             }
-
+            ViewBag.Employees = unitOfWork.Employees.GetAll();
             ViewBag.SelectedDate = taskDate ?? DateTime.Now.ToString("yyyy-MM");
 
             return View();
@@ -302,7 +302,7 @@ namespace RedPetroleum.Controllers.CRUD
         {
             if (String.IsNullOrEmpty(mark)) return 0;
             double number;
-            if (double.TryParse(mark, out number))
+            if (double.TryParse(mark.Replace('.', ','), out number))
                 return number;
 
             throw new FormatException();

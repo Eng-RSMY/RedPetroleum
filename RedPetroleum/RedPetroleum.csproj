@@ -333,6 +333,10 @@
     <Compile Include="Migrations\201807090456259_Add_displayName_TaskList.Designer.cs">
       <DependentUpon>201807090456259_Add_displayName_TaskList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807180442599_Delete-Employee_DateBorn.cs" />
+    <Compile Include="Migrations\201807180442599_Delete-Employee_DateBorn.Designer.cs">
+      <DependentUpon>201807180442599_Delete-Employee_DateBorn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -364,6 +368,8 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Chosen\chosen-sprite.png" />
+    <Content Include="Content\Chosen\chosen.min.css" />
     <Content Include="Content\custom.min.css" />
     <Content Include="Content\logotip.png" />
     <Content Include="Content\open-iconic\.gitignore" />
@@ -1953,6 +1959,7 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\chosen.jquery.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
@@ -3481,6 +3488,9 @@
     <EmbeddedResource Include="Migrations\201807090456259_Add_displayName_TaskList.resx">
       <DependentUpon>201807090456259_Add_displayName_TaskList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807180442599_Delete-Employee_DateBorn.resx">
+      <DependentUpon>201807180442599_Delete-Employee_DateBorn.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
@@ -3503,7 +3513,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54887</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

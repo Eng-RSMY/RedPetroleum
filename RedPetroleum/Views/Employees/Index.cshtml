@@ -20,7 +20,7 @@
     <!-- Search  -->
     <div class="row">
         <div class="col-md-11 search-div">
-            <input type="text" id="searching" name="searching" class="form-control search" placeholder="Введите имя сотрудника" onchange="form.submit();"
+            <input type="text" id="searching" name="searching" class="form-control search" autocomplete="off" placeholder="Введите имя сотрудника" onchange="form.submit();"
                    style="border: 1px solid; border-color: #008cba;" />
         </div>
         <div class="col-md-1 search-div-btn">
@@ -34,22 +34,19 @@
 }
 <table class="table table-striped">
     <tr>
-        <th>
+        <th class="w-25">
             ФИО
         </th>
-        <th>
+        <th class="w-25">
             Отдел
         </th>
-        <th>
+        <th class="w-25">
             Должность
         </th>
-        <th>
-            Дата Рождения
-        </th>
-        <th>
+        <th class="w-25">
             Дата Принятия
         </th>
-        <th>
+        <th class="col-md-1">
             Уволен
         </th>
         <th></th>
@@ -67,9 +64,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Position.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateBorn)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AdoptionDate)
