@@ -17,4 +17,16 @@
             <td></td>
         </tr>
     }
+    if(!Double.IsNaN(ViewBag.AverageByCompany))
+    { 
+        <tr>
+            <th colspan="4">
+                Средний показатель по отделу:
+            </th>
+            <td></td>
+            <td class="text-center">@ViewBag.AverageByCompany %</td>
+            <td></td>
+            <td></td>
+        </tr>
+    }
 }

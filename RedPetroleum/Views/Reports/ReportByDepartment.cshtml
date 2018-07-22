@@ -53,12 +53,22 @@
                         <td></td>
                     </tr>
                 }
+                if (!Double.IsNaN(ViewBag.AverageByDepartment))
+                {
+                    <tr>
+                        <th colspan="3">
+                            Средний показатель по отделу:
+                        </th>
+                        <td class="text-center">@ViewBag.AverageByDepartment %</td>
+                        <td></td>
+                    </tr>
+                }
             }
         </tbody>
     </table>
     @Html.AntiForgeryToken()
     <button type="button" id="downloadBtn" disabled class="btn btn-success" onclick="downloadReport('ReportByDepartment')">Скачать отчет</button>
-    <button type="button" id="downloadBtn2"  class="btn btn-success" onclick="ShowEmployeeChart();">Показать график</button>
+    <button type="button" id="downloadBtn2" class="btn btn-success" onclick="ShowEmployeeChart();">Показать график</button>
 </div>
 <div id="chartContainer" style="height: 370px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
@@ -76,7 +86,7 @@
         });
         var employees = document.getElementsByClassName("employee");
         console.log(i);
-        for (var j = i-1; j >= 0; j--) {
+        for (var j = i - 1; j >= 0; j--) {
 
             let str = marks[j].textContent.split("").reverse().join("").slice(2);
             let reversed = str.substring().split("").reverse().join("");

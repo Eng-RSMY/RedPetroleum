@@ -54,6 +54,7 @@ namespace RedPetroleum.Controllers
 
                         employeeList.Add(model);
                     }
+                    ViewBag.AverageByDepartment = Math.Round(Convert.ToDouble(employeeList.Select(x => x.AverageMark).Sum() / employeeList.Count), 2);
                     return View(employeeList);
                 }
                 return View();
@@ -82,6 +83,7 @@ namespace RedPetroleum.Controllers
 
                         employeeList.Add(model);
                     }
+                    ViewBag.AverageByDepartment = Math.Round(Convert.ToDouble(employeeList.Select(x => x.AverageMark).Sum() / employeeList.Count), 2);
                     return View(employeeList);
                 }
                 return View();
@@ -111,6 +113,7 @@ namespace RedPetroleum.Controllers
 
                 empList.Add(model);
             }
+            ViewBag.AverageByDepartment = Math.Round(Convert.ToDouble(empList.Select(x => x.AverageMark).Sum() / empList.Count), 2);
             return PartialView(empList);
         }
 
@@ -131,12 +134,12 @@ namespace RedPetroleum.Controllers
                     Department = employee.Department.Name,
                     Position = employee.Position.Name,
                     AdoptionDate = employee.AdoptionDate,
-                    AverageMark = employee.TaskLists.Select(t => t.AverageMark).Average()
+                    AverageMark = employee.TaskLists.Select(t => t.AverageMark).Average(),
                 };
-
                 employeeList.Add(model);
             }
             ViewBag.Today = DateTime.Now.ToString("yyyy-MM");
+            ViewBag.AverageByCompany = Math.Round(Convert.ToDouble(employeeList.Select(x => x.AverageMark).Sum() / employeeList.Count),2);
             return View(employeeList);
         }
         [HttpPost]
@@ -163,6 +166,7 @@ namespace RedPetroleum.Controllers
                 employeeList.Add(model);
             }
             ViewBag.Today = DateTime.Now.ToString("yyyy-MM");
+            ViewBag.AverageByCompany = Math.Round(Convert.ToDouble(employeeList.Select(x => x.AverageMark).Sum() / employeeList.Count), 2);
             return PartialView(employeeList);
         }
 
@@ -478,6 +482,7 @@ namespace RedPetroleum.Controllers
 
                         taskList.Add(model);
                     }
+                    ViewBag.AverageByDG = Math.Round(Convert.ToDouble(taskList.Select(x => x.AverageMark).Sum() / taskList.Count), 2);
                     return View(taskList);
                 }
                 return View();
@@ -506,6 +511,7 @@ namespace RedPetroleum.Controllers
 
                 taskList.Add(model);
             }
+            ViewBag.AverageByDG = Math.Round(Convert.ToDouble(taskList.Select(x => x.AverageMark).Sum() / taskList.Count), 2);
             return PartialView(taskList);
         }
 

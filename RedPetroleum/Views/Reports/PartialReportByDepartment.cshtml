@@ -15,4 +15,14 @@
             <td></td>
         </tr>
     }
+    if (!Double.IsNaN(ViewBag.AverageByDepartment))
+    {
+        <tr>
+            <th colspan="3">
+                Средний показатель по отделу:
+            </th>
+            <td class="text-center">@ViewBag.AverageByDepartment %</td>
+            <td></td>
+        </tr>
+    }
 }
