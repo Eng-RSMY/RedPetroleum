@@ -15,4 +15,14 @@
             <td>@employee.CommentEmployees</td>
         </tr>
     }
+    if (!Double.IsNaN(ViewBag.AverageByDG))
+    {
+        <tr>
+            <th colspan="2">
+                Средний показатель по отделу:
+            </th>
+            <td class="text-center">@ViewBag.AverageByDG %</td>
+            <td></td>
+        </tr>
+    }
 }

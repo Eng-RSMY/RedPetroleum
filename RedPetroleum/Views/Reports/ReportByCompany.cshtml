@@ -14,7 +14,7 @@
             <input class="form-control" id="taskDate" type="month" name="taskDate" value="@ViewBag.Today" onchange="updateCompanyTable()">
         </div>
     </div>
-    <br/>
+    <br />
     <table class="table table-striped">
         <thead>
             <tr>
@@ -46,7 +46,19 @@
                         <td>@item.Department</td>
                         <td>@item.Position</td>
                         <td class="text-center">@item.AdoptionDate</td>
-                        <td class="text-center">@Math.Round(Convert.ToDouble(item.AverageMark),2) %</td>
+                        <td class="text-center">@Math.Round(Convert.ToDouble(item.AverageMark), 2) %</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                }
+                if (!Double.IsNaN(ViewBag.AverageByCompany))
+                {
+                    <tr>
+                        <th colspan="4">
+                            Средний показатель по отделу:
+                        </th>
+                        <td></td>
+                        <td class="text-center">@ViewBag.AverageByCompany %</td>
                         <td></td>
                         <td></td>
                     </tr>
