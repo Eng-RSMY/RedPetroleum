@@ -14,6 +14,8 @@ namespace RedPetroleum.Models
         public string Position;
         public string AdoptionDate;
         public double? AverageMark;
+        public double? VisitationMark;
+        public double? StepMark; // сводная оценка
     }
 
     public class ReportByInstructionsDGViewModel

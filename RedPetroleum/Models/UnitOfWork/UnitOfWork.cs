@@ -16,10 +16,21 @@ namespace RedPetroleum.Models.UnitOfWork
         private EmployeeRepository employeeRepository;
         private PositionRepository positionRepository;
         private TaskListRepository listRepository;
+        private VisitationRepository visitationRepository;
 
         public UnitOfWork() => db = new ApplicationDbContext();
 
         public UnitOfWork(string connectionString) => db = new ApplicationDbContext(connectionString);
+
+        public VisitationRepository Visitations
+        {
+            get
+            {
+                if (visitationRepository == null)
+                    visitationRepository = new VisitationRepository(db);
+                return visitationRepository;
+            }
+        }
 
         public DepartmentRepository Departments
         {

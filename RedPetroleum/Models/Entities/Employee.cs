@@ -26,5 +26,6 @@ namespace RedPetroleum.Models.Entities
         public ICollection<TaskList> TaskLists { get; set; }
         public Department Department { get; set; }
         public Position Position { get; set; }
+        public ICollection<Visitation> Visitations { get; set; }
     }
 }

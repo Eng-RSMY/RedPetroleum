@@ -10,6 +10,7 @@ namespace RedPetroleum.Models.Interfaces
         EmployeeRepository Employees { get; }
         PositionRepository Positions { get; }
         TaskListRepository TaskLists { get; }
+        VisitationRepository Visitations { get; }
         void Save();
         Task SaveAsync();
     }

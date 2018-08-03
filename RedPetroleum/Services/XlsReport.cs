@@ -234,6 +234,12 @@ namespace RedPetroleum.Services
                 worksheet.Cells[$"E{cellIndex}"].Style.Numberformat.Format = "dd.mm.yyyy";
                 worksheet.Cells[$"F{cellIndex}"].Style.Numberformat.Format = "0.00%";
                 worksheet.Cells[$"F{cellIndex}"].Value = Math.Round(Convert.ToDouble(employee.TaskLists.Select(t => t.AverageMark).Average()), 2) / 100;
+                worksheet.Cells[$"G{cellIndex}"].Style.Numberformat.Format = "0.00%";
+                worksheet.Cells[$"G{cellIndex}"].Value = Math.Round(Convert.ToDouble(employee.Visitations.Select(m => m.VisitMark).Average()), 2) / 100;
+                worksheet.Cells[$"H{cellIndex}"].Style.Numberformat.Format = "0.00%";
+                worksheet.Cells[$"H{cellIndex}"].Value = Math.Round(Convert.ToDouble(employee.Visitations.Select(m => m.VisitMark).Average() +
+                                 employee.TaskLists.Select(t => t.AverageMark).Average()) / 2) / 100;
+
             }
 
             worksheet.Cells[$"A{++cellIndex}:E{cellIndex}"].Merge = true;

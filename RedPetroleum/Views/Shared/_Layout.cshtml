@@ -60,7 +60,7 @@
                                 <a class="dropdown-item" href="@Url.Action("DepartmentTasks", "TaskLists")">Задачи ГД</a>
                             </div>
                         </li>
-                       
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Visitations")">Посещаемость</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Отчеты</a>
                             <div class="dropdown-menu">
@@ -86,19 +86,11 @@
                                 <a class="dropdown-item" href="@Url.Action("DepartmentTasks", "TaskLists")">Задачи ГД</a>
                             </div>
                         </li>
-
+                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Visitations")">Посещаемость</a></li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Отчеты</a>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="@Url.Action("ReportByCompany", "Reports")">Отчет по компании</a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="@Url.Action("ReportByDepartment", "Reports")">Отчет по отделам</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="@Url.Action("ReportByDepartmentAverageMark", "Reports")">Отчет средних показателей по отделам</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="@Url.Action("ReportByConsolidated", "Reports")">Отчет консолидированный</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="@Url.Action("ReportByInstructionsDG", "Reports")">Отчет по задачам ГД</a>
                             </div>
                         </li>
                     }
@@ -126,7 +118,15 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year</p>
+            @if (DateTime.Now.Year == 2018)
+            {
+                <p>&copy; @DateTime.Now.Year</p>
+            }
+            else
+            {
+                <p>&copy; 2018 - @DateTime.Now.Year</p>
+            }
+
         </footer>
     </div>
 

@@ -1,0 +1,110 @@
+﻿@model IEnumerable<RedPetroleum.Models.Entities.Visitation>
+@using X.PagedList
+@using X.PagedList.Mvc
+@using X.PagedList.Mvc.Bootstrap4
+@{
+    ViewBag.Title = "Оценка посещения";
+}
+
+<h2>Посещение</h2>
+
+<p>
+    <a type="button" class="btn btn-primary" href="@Url.Action("Create", "Visitations")">
+        <i class="fa fa-plus"></i>
+        Оценить посещение
+    </a>
+</p>
+
+
+@Html.AntiForgeryToken()
+<!-- Search  -->
+<div class="row">
+    <div class="col-md-11 search-div">
+        <input type="text" id="searching" name="searching" class="form-control search" autocomplete="off" placeholder="Введите имя сотрудника" onchange="form.submit();"
+               style="border: 1px solid; border-color: #008cba;" />
+    </div>
+    <div class="col-md-1 search-div-btn">
+        <button type="submit" class="btn btn-default default-btn">
+            <i class="fa fa-search"></i>
+            Поиск
+        </button>
+
+    </div>
+</div>
+
+<table class="table">
+    <tr>
+        <th class="text-center">
+            Имя Сотрудника
+        </th>
+        <th class="text-center">
+            Отдел
+        </th>
+        <th class="text-center">
+            Дата
+        </th>
+        <th class="text-center">
+            Оценка
+        </th>
+        <th class="text-center">
+            Действия
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        var myModal = "myModal" + item.Id;
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.Employee.EFullName)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Employee.Department.Name)
+            </td>
+            <td class="text-center">
+                @(((DateTime)item.Date).ToString("MMMM - yyyy"))
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(model => item.VisitMark)
+            </td>
+            <td style="text-align:right;">
+                <div class="btn-group" role="group">
+                    <a class="btn btn-info" name="editButton" id="editButton" href="@Url.Action("Edit", "Visitations", new { id = item.Id})"><i class="fa fa-pencil" aria-hidden="true" title="Редактировать" data-toggle="tooltip" data-placement="top" data-original-title="Tooltip on top"><span style="padding: 5px;">Редактировать</span></i></a>
+                    <a class="btn btn-warning" name="detailsButton" id="detailsButton" href="@Url.Action("Details", "Visitations", new { id = item.Id})"><i class="fa fa-eye" aria-hidden="true" title="Просмотреть" data-toggle="tooltip" data-placement="top"><span style="padding: 5px;">Просмотреть</span></i></a>
+                    <a a class="btn btn-danger" name="deleteButton" id="deleteButton" href="@Url.Action("Delete","Visitations", new {id = item.Id})" data-toggle="modal" data-target="#@myModal"
+                       data-whatever="@item.Id"><i class="fa fa-trash" aria-hidden="true" title="Удалить" data-toggle="tooltip" data-placement="top"><span style="padding: 5px;">Удалить</span></i></a>
+                </div>
+                <!-- Confirmation modal -->
+                <div class="modal fade" id="@myModal" tabindex="-1" role="dialog" aria-labelledby="confirmdelete" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="confirmdelete">Удаление</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Вы действительно хотите удалить оценку <span><b>@item.Employee.EFullName</b></span> за <span><b>@item.Date</b></span>?
+                            </div>
+                            @using (Html.BeginForm("Delete", "Visitations", FormMethod.Post, new { enctype = "multipart/form-data", @class = "delete-form" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+                                    <input type="submit" value="Удалить" class="btn btn-danger" />
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+    }
+
+</table>
+
+
+@Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page }), Bootstrap4PagedListRenderOptions.Default)

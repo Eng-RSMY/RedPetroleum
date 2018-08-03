@@ -13,8 +13,15 @@
             <td>@employee.Position</td>
             <td class="text-center">@employee.AdoptionDate</td>
             <td class="text-center">@Math.Round(Convert.ToDouble(employee.AverageMark), 2) %</td>
-            <td></td>
-            <td></td>
+            @if(employee.VisitationMark!= null)
+            {
+                <td class="text-center">@employee.VisitationMark %</td>
+            }
+            else
+            {
+                <td class="text-center">0 %</td>
+            }
+            <td class="text-center">@Math.Round(Convert.ToDouble(employee.StepMark), 2) %</td>
         </tr>
     }
     if(!Double.IsNaN(ViewBag.AverageByCompany))

@@ -283,6 +283,7 @@
     <Compile Include="Controllers\CRUD\PositionsController.cs" />
     <Compile Include="Controllers\CRUD\RolesController.cs" />
     <Compile Include="Controllers\CRUD\TaskListsController.cs" />
+    <Compile Include="Controllers\CRUD\VisitationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
@@ -337,8 +338,13 @@
     <Compile Include="Migrations\201807180442599_Delete-Employee_DateBorn.Designer.cs">
       <DependentUpon>201807180442599_Delete-Employee_DateBorn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808020347555_Visitation.cs" />
+    <Compile Include="Migrations\201808020347555_Visitation.Designer.cs">
+      <DependentUpon>201808020347555_Visitation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Entities\Visitation.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Interfaces\IRepository.cs" />
     <Compile Include="Models\Interfaces\IUnitOfWork.cs" />
@@ -352,8 +358,10 @@
     <Compile Include="Models\Repositories\EmployeeRepository.cs" />
     <Compile Include="Models\Repositories\PositionRepository.cs" />
     <Compile Include="Models\Repositories\TaskListRepository.cs" />
+    <Compile Include="Models\Repositories\VisitationRepository.cs" />
     <Compile Include="Models\UnitOfWork\UnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\LogoutModule.cs" />
     <Compile Include="Services\XlsReport.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -3357,7 +3365,9 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -3447,6 +3457,10 @@
     <Content Include="Views\TaskLists\CreateDepartmentTaskPost.cshtml" />
     <Content Include="Views\TaskLists\EditDepartmentTask.cshtml" />
     <Content Include="Views\TaskLists\DepartmentTaskDetails.cshtml" />
+    <Content Include="Views\Visitations\Index.cshtml" />
+    <Content Include="Views\Visitations\Details.cshtml" />
+    <Content Include="Views\Visitations\Create.cshtml" />
+    <Content Include="Views\Visitations\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -3490,6 +3504,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201807180442599_Delete-Employee_DateBorn.resx">
       <DependentUpon>201807180442599_Delete-Employee_DateBorn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808020347555_Visitation.resx">
+      <DependentUpon>201808020347555_Visitation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

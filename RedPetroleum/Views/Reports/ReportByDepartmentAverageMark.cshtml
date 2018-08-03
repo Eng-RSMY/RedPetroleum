@@ -102,8 +102,10 @@
         console.log(i);
         var num = 10;
         var marks = document.getElementsByClassName("mark");
+        console.log(marks);
         var departments = document.getElementsByClassName("department");
         for (var j = 0; j < i - 1; j++) {
+            if (marks[j].textContent == "") console.log(1);
             if (marks[j].textContent != "" || marks[j].textContent == null) {
                 let str = marks[j].textContent.split("").reverse().join("").slice(2);
                 let reversed = str.substring().split("").reverse().join("");

@@ -134,12 +134,16 @@ namespace RedPetroleum.Controllers
                     Department = employee.Department.Name,
                     Position = employee.Position.Name,
                     AdoptionDate = employee.AdoptionDate,
+                    VisitationMark = employee.Visitations.Select(m => m.VisitMark).Average(),
                     AverageMark = employee.TaskLists.Select(t => t.AverageMark).Average(),
+                    StepMark = ((employee.Visitations.Select(m => m.VisitMark).Average() + 
+                                 employee.TaskLists.Select(t => t.AverageMark).Average()) / 2)
                 };
                 employeeList.Add(model);
             }
             ViewBag.Today = DateTime.Now.ToString("yyyy-MM");
             ViewBag.AverageByCompany = Math.Round(Convert.ToDouble(employeeList.Select(x => x.AverageMark).Sum() / employeeList.Count),2);
+
             return View(employeeList);
         }
         [HttpPost]
@@ -147,7 +151,6 @@ namespace RedPetroleum.Controllers
         public ActionResult PartialReportByCompany(DateTime? dateValue)
         {
             IEnumerable<Employee> employees = unit.Employees.GetEmployeesByTaskDate(dateValue);
-
             var employeeList = new List<ReportByCompanyViewModel>();
 
             ReportByCompanyViewModel model;
@@ -160,7 +163,10 @@ namespace RedPetroleum.Controllers
                     Department = employee.Department.Name,
                     Position = employee.Position.Name,
                     AdoptionDate = employee.AdoptionDate,
-                    AverageMark = employee.TaskLists.Select(t => t.AverageMark).Average()
+                    VisitationMark = employee.Visitations.Select(m => m.VisitMark).Average(),
+                    AverageMark = employee.TaskLists.Select(t => t.AverageMark).Average(),
+                    StepMark = ((employee.Visitations.Select(m => m.VisitMark).Average() +
+                                 employee.TaskLists.Select(t => t.AverageMark).Average()) / 2)
                 };
 
                 employeeList.Add(model);

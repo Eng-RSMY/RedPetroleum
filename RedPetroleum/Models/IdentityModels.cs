@@ -38,6 +38,7 @@ namespace RedPetroleum.Models
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<TaskList> TaskLists { get; set; }
+        public DbSet<Visitation> Visitations { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

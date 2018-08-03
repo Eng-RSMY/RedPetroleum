@@ -47,8 +47,8 @@
                         <td>@item.Position</td>
                         <td class="text-center">@item.AdoptionDate</td>
                         <td class="text-center">@Math.Round(Convert.ToDouble(item.AverageMark), 2) %</td>
-                        <td></td>
-                        <td></td>
+                        <td class="text-center">@item.VisitationMark %</td>
+                        <td class="text-center">@item.StepMark %</td>
                     </tr>
                 }
                 if (!Double.IsNaN(ViewBag.AverageByCompany))

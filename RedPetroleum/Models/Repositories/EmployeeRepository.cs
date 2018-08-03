@@ -96,12 +96,12 @@ namespace RedPetroleum.Models.Repositories
         public IEnumerable<Employee> GetEmployeesByTaskDate(DateTime? taskDate)
         {
             return taskDate == null 
-                ? db.Employees.Include(t => t.TaskLists).Include(p => p.Position).Include(d => d.Department).OrderBy(d => d.Department.Name ).ThenBy(e => e.EFullName)
+                ? db.Employees.Include(t => t.TaskLists).Include(p => p.Position).Include(v=>v.Visitations).Include(d => d.Department).OrderBy(d => d.Department.Name ).ThenBy(e => e.EFullName)
                 .Where(e =>
                     ((DateTime)e.TaskLists.FirstOrDefault().TaskDate).Month == DateTime.Now.Month &&
                     ((DateTime)e.TaskLists.FirstOrDefault().TaskDate).Year == DateTime.Now.Year
                 ) 
-                : db.Employees.Include(t => t.TaskLists).Include(p => p.Position).Include(d => d.Department).OrderBy(d => d.Department.Name).ThenBy(e => e.EFullName)
+                : db.Employees.Include(t => t.TaskLists).Include(p => p.Position).Include(v => v.Visitations).Include(d => d.Department).OrderBy(d => d.Department.Name).ThenBy(e => e.EFullName)
                 .Where(e =>
                     ((DateTime)e.TaskLists.FirstOrDefault().TaskDate) == taskDate
                 );
