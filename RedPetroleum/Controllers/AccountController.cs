@@ -173,16 +173,16 @@ namespace RedPetroleum.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            //DateTime date = new DateTime(2018, 8, 3);
-            //var now = DateTime.Now;
+            DateTime date = new DateTime(2018, 8, 19);
+            var now = DateTime.Now;
 
-            //if (now < date)
-            //{
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            if (now < date)
+            {
+                ViewBag.ReturnUrl = returnUrl;
+                return View();
 
-            //}
-            //return RedirectToAction("About", "Home");
+            }
+            return RedirectToAction("About", "Home");
         }
 
         //

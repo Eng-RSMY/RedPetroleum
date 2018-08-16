@@ -32,9 +32,8 @@ namespace RedPetroleum.Controllers.CRUD
             int pageSize = 10;
             int pageNumber = (page ?? 1);
             var employees = unitOfWork.Employees.GetAllIndex(pageNumber, pageSize, searching);
-            var filteredEmployees = (!String.IsNullOrEmpty(positionId)) || (!String.IsNullOrEmpty(departmentId))
-                ? unitOfWork.Employees.Filter(pageNumber, pageSize, employees, positionId, departmentId).OrderBy(x=>x.EFullName) 
-                : null;
+            var filteredEmployees = unitOfWork.Employees.Filter(pageNumber, pageSize, employees, positionId, departmentId).OrderBy(x => x.EFullName);
+
             ViewBag.Message = TempData["Message"];
             ViewBag.PositionName = new SelectList(unitOfWork.Positions.GetAll(), "PositionId", "Name");
             ViewBag.DepartmentName = new SelectList(unitOfWork.Departments.GetAll(), "DepartmentId", "Name");

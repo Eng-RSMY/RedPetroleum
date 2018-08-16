@@ -155,7 +155,8 @@ namespace RedPetroleum.Models.Repositories
                 employees = employee.Where(e => e.Position.PositionId.ToString() == positionId).ToPagedList(pageNumber, pageSize);
             if (!String.IsNullOrEmpty(departmentId))
                 employees = employee.Where(e => e.Department.DepartmentId.ToString() == departmentId).ToPagedList(pageNumber, pageSize);
-            
+            if ((!String.IsNullOrEmpty(positionId)) && (!String.IsNullOrEmpty(departmentId)))
+                employees = employee.Where(e => e.Department.DepartmentId.ToString() == departmentId && e.PositionId.ToString() == positionId).ToPagedList(pageNumber, pageSize);
             return employees;
         }
     }

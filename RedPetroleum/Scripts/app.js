@@ -1,5 +1,5 @@
 
-//This function for show and update DataTable ReportByDepartment on View
+//This function for show and update DaoitaTable ReportByDepartment on View
 function updateDepartmentTable() {
     var token = $('input[name="__RequestVerificationToken"]').val();
     var dropDown = document.getElementById("departmentsDropdown");
@@ -238,8 +238,8 @@ function addTask(forDepartment = null, inputHtml = null) {
         </div>
         <div class="col-md-2">
             <small class="form-text text-muted">Действия</small>
-            <button type="button" class="btn btn-success" id="submitTask" onclick="submitTask(${forDepartment})" title="Сохранить"><span class="oi oi-check" title="Сохранить" aria-hidden="true"></span></button>
-            <button type="button" class="btn btn-danger" id="removeGeneratedHtml" onclick="removeGeneratedHtml()"><span class="oi oi-x" title="Удалить" aria-hidden="true"></span></button>
+            <button type="button" class="btn btn-success" id="submitTask" onclick="submitTask(${forDepartment})" title="Сохранить"><span class="fa fa-check" title="Сохранить" aria-hidden="true"></span></button>
+            <button type="button" class="btn btn-danger" id="removeGeneratedHtml" onclick="removeGeneratedHtml()"><span class="fa fa-close" title="Удалить" aria-hidden="true"></span></button>
         </div>
     </div>
 `;
@@ -431,8 +431,8 @@ function editTask(forDepartment, taskId) {
         </div>
         <div class="col-md-2">
             <small class="form-text text-muted">Действия</small>
-            <button type="button" class="btn btn-success" id="editTask" onclick="submitEditTask(${forDepartment})" title="Сохранить"><span class="oi oi-check" title="Сохранить" aria-hidden="true"></span></button>
-            <button type="button" class="btn btn-danger" id="removeGeneratedHtml" onclick="removeGeneratedHtml()"><span class="oi oi-x" title="Удалить" aria-hidden="true"></span></button>
+            <button type="button" class="btn btn-success" id="editTask" onclick="submitEditTask(${forDepartment})" title="Сохранить"><span class="fa fa-check" title="Сохранить" aria-hidden="true"></span></button>
+            <button type="button" class="btn btn-danger" id="removeGeneratedHtml" onclick="removeGeneratedHtml()"><span class="fa fa-close" title="Удалить" aria-hidden="true"></span></button>
         </div>
     </div>
 `;
